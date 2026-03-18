@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 const testimonials = [
-  { quote: "Papaya International changed my life. I discovered my passion for youth work and made friends from all over Europe.", name: "Elena, 22", country: "Romania" },
-  { quote: "The training was incredible — I learned facilitation skills I now use every day in my community work.", name: "Jakub, 25", country: "Czech Republic" },
-  { quote: "Being part of the exchange opened my eyes to different cultures and gave me confidence I never had before.", name: "Maria, 20", country: "Portugal" },
+  { quote: "Papaya International changed my life. I discovered my passion for youth work and made friends from all over Europe.", name: "Elena, 22", country: "🇷🇴 Romania" },
+  { quote: "The training was incredible — I learned facilitation skills I now use every day in my community work.", name: "Jakub, 25", country: "🇨🇿 Czech Republic" },
+  { quote: "Being part of the exchange opened my eyes to different cultures and gave me confidence I never had before.", name: "Maria, 20", country: "🇵🇹 Portugal" },
 ];
 
 const fadeUp = {
@@ -17,7 +17,7 @@ const fadeUp = {
 
 const TestimonialsSection = () => {
   return (
-    <section className="section-padding bg-muted/50">
+    <section className="section-padding bg-background">
       <div className="container-narrow mx-auto">
         <motion.div
           initial="hidden"
@@ -25,11 +25,11 @@ const TestimonialsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} custom={0} className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
             Testimonials
           </motion.span>
-          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mt-2 text-foreground">
-            Stories from Our Participants
+          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
+            What Participants Say 💬
           </motion.h2>
         </motion.div>
 
@@ -44,12 +44,12 @@ const TestimonialsSection = () => {
               key={t.name}
               variants={fadeUp}
               custom={i}
-              className="bg-card rounded-2xl p-8 border border-border card-hover relative"
+              className="bg-papaya-light rounded-3xl p-8 border border-primary/10 card-hover relative"
             >
-              <Quote className="w-8 h-8 text-primary/20 mb-4" />
-              <p className="text-foreground mb-6 leading-relaxed italic">"{t.quote}"</p>
+              <Quote className="w-10 h-10 text-primary/15 mb-4" />
+              <p className="text-foreground mb-6 leading-relaxed italic text-lg">"{t.quote}"</p>
               <div>
-                <p className="font-bold text-foreground">{t.name}</p>
+                <p className="font-extrabold text-foreground">{t.name}</p>
                 <p className="text-sm text-muted-foreground">{t.country}</p>
               </div>
             </motion.div>

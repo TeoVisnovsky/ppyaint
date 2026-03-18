@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram, Facebook } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -25,43 +25,50 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-card/90 backdrop-blur-lg shadow-sm" : "bg-transparent"
+        scrolled ? "bg-card/95 backdrop-blur-lg shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="container-narrow mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 md:h-20">
-        <a href="#" className="font-heading text-xl md:text-2xl font-bold">
-          <span className="gradient-text">Papaya</span>{" "}
-          <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>International</span>
+        <a href="#" className="font-heading text-xl md:text-2xl font-extrabold flex items-center gap-1">
+          <span className="text-primary">🥭</span>
+          <span className="gradient-text">Papaya</span>
+          <span className="text-foreground">International</span>
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                scrolled ? "text-foreground" : "text-primary-foreground/80"
-              }`}
+              className="text-sm font-bold text-foreground/70 transition-colors hover:text-primary"
             >
               {link.label}
             </a>
           ))}
           <Button variant="cta" size="sm" asChild>
-            <a href="#get-involved">Join Us</a>
+            <a href="#get-involved">Kontakt</a>
           </Button>
+          <div className="flex gap-2 ml-1">
+            <a href="#" className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
+              <Instagram className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2"
+          className="lg:hidden p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
-            <X className={scrolled ? "text-foreground" : "text-primary-foreground"} />
+            <X className="text-foreground" />
           ) : (
-            <Menu className={scrolled ? "text-foreground" : "text-primary-foreground"} />
+            <Menu className="text-foreground" />
           )}
         </button>
       </div>
@@ -73,14 +80,14 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-card/95 backdrop-blur-lg border-b border-border"
+            className="lg:hidden bg-card/98 backdrop-blur-lg border-b border-border"
           >
             <div className="flex flex-col gap-2 p-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-foreground font-medium py-2 px-4 rounded-lg hover:bg-muted transition-colors"
+                  className="text-foreground font-bold py-2 px-4 rounded-xl hover:bg-papaya-light transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}

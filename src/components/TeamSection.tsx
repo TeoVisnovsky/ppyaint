@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 
 const team = [
-  { name: "Anna Kováčová", role: "Founder & Director", bio: "Passionate youth worker with 10+ years in international education and Erasmus+ project management." },
-  { name: "Marek Horváth", role: "Project Coordinator", bio: "Expert in non-formal education methodologies and youth exchange program design." },
-  { name: "Sofia Petrová", role: "Communications Lead", bio: "Creative storyteller dedicated to amplifying youth voices across Europe." },
-  { name: "Tomáš Novák", role: "Training Facilitator", bio: "Dynamic facilitator specializing in personal development and intercultural learning." },
+  { name: "Anna Kováčová", role: "Founder & Director", bio: "Passionate youth worker with 10+ years in international education and Erasmus+ project management.", emoji: "👩‍💼" },
+  { name: "Marek Horváth", role: "Project Coordinator", bio: "Expert in non-formal education methodologies and youth exchange program design.", emoji: "👨‍🏫" },
+  { name: "Sofia Petrová", role: "Communications Lead", bio: "Creative storyteller dedicated to amplifying youth voices across Europe.", emoji: "📣" },
+  { name: "Tomáš Novák", role: "Training Facilitator", bio: "Dynamic facilitator specializing in personal development and intercultural learning.", emoji: "🎓" },
 ];
 
-const colors = [
-  "from-primary to-accent",
-  "from-secondary to-primary",
-  "from-accent to-secondary",
-  "from-primary to-secondary",
+const bgColors = [
+  "from-primary/20 to-secondary/20",
+  "from-accent/20 to-primary/20",
+  "from-secondary/20 to-papaya-yellow/20",
+  "from-papaya-yellow/20 to-accent/20",
 ];
 
 const fadeUp = {
@@ -24,7 +24,7 @@ const fadeUp = {
 
 const TeamSection = () => {
   return (
-    <section id="team" className="section-padding bg-muted/50">
+    <section id="team" className="section-padding bg-papaya-light">
       <div className="container-narrow mx-auto">
         <motion.div
           initial="hidden"
@@ -32,13 +32,13 @@ const TeamSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} custom={0} className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
             Our Team
           </motion.span>
-          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mt-2 text-foreground">
-            Meet the People Behind Papaya
+          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
+            Meet the Papaya Crew 🍉
           </motion.h2>
-          <motion.p variants={fadeUp} custom={1} className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <motion.p variants={fadeUp} custom={1} className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
             A dedicated team united by a shared passion for youth empowerment and international cooperation.
           </motion.p>
         </motion.div>
@@ -54,16 +54,16 @@ const TeamSection = () => {
               key={member.name}
               variants={fadeUp}
               custom={i}
-              className="bg-card rounded-2xl overflow-hidden card-hover border border-border"
+              className="bg-card rounded-3xl overflow-hidden card-hover border border-border"
             >
-              <div className={`h-48 bg-gradient-to-br ${colors[i]} flex items-center justify-center`}>
-                <div className="w-24 h-24 rounded-full bg-card/20 backdrop-blur-sm flex items-center justify-center text-3xl font-bold text-primary-foreground">
-                  {member.name.split(" ").map(n => n[0]).join("")}
+              <div className={`h-44 bg-gradient-to-br ${bgColors[i]} flex items-center justify-center relative`}>
+                <div className="w-24 h-24 rounded-full bg-card shadow-lg flex items-center justify-center text-4xl">
+                  {member.emoji}
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="font-bold text-foreground text-lg">{member.name}</h3>
-                <p className="text-primary text-sm font-medium mb-3">{member.role}</p>
+              <div className="p-6 text-center">
+                <h3 className="font-extrabold text-foreground text-lg">{member.name}</h3>
+                <p className="text-primary text-sm font-bold mb-3">{member.role}</p>
                 <p className="text-sm text-muted-foreground">{member.bio}</p>
               </div>
             </motion.div>

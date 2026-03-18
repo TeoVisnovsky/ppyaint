@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { BookOpen, Plane, Users2, Lightbulb, GraduationCap, Handshake } from "lucide-react";
 
 const services = [
-  { icon: Users2, title: "Youth Work Activities", desc: "Community-based programs that engage young people in meaningful social action and skill building." },
-  { icon: BookOpen, title: "Workshops & Trainings", desc: "Interactive non-formal education sessions on leadership, inclusion, and active citizenship." },
-  { icon: Plane, title: "Youth Exchanges", desc: "International mobility programs where young people learn through cross-cultural immersion." },
-  { icon: GraduationCap, title: "Erasmus+ Projects", desc: "EU-funded projects in partnership with organizations across Europe for youth empowerment." },
-  { icon: Lightbulb, title: "Personal Development", desc: "Programs focused on self-discovery, confidence building, and future career skills." },
-  { icon: Handshake, title: "International Cooperation", desc: "Strategic partnerships with NGOs, institutions, and communities across the continent." },
+  { icon: Users2, title: "Youth Work Activities", desc: "Community-based programs that engage young people in meaningful social action and skill building.", color: "bg-primary/10 text-primary" },
+  { icon: BookOpen, title: "Workshops & Trainings", desc: "Interactive non-formal education sessions on leadership, inclusion, and active citizenship.", color: "bg-accent/10 text-accent" },
+  { icon: Plane, title: "Youth Exchanges", desc: "International mobility programs where young people learn through cross-cultural immersion.", color: "bg-secondary/10 text-secondary" },
+  { icon: GraduationCap, title: "Erasmus+ Projects", desc: "EU-funded projects in partnership with organizations across Europe for youth empowerment.", color: "bg-papaya-yellow/20 text-papaya-orange" },
+  { icon: Lightbulb, title: "Personal Development", desc: "Programs focused on self-discovery, confidence building, and future career skills.", color: "bg-primary/10 text-primary" },
+  { icon: Handshake, title: "International Cooperation", desc: "Strategic partnerships with NGOs, institutions, and communities across the continent.", color: "bg-accent/10 text-accent" },
 ];
 
 const fadeUp = {
@@ -28,11 +28,11 @@ const ServicesSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} custom={0} className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
             What We Do
           </motion.span>
-          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mt-2 text-foreground">
-            Creating Impact Through Action
+          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
+            Creating Impact Through Action 🚀
           </motion.h2>
         </motion.div>
 
@@ -47,13 +47,12 @@ const ServicesSection = () => {
               key={s.title}
               variants={fadeUp}
               custom={i}
-              className="group bg-card rounded-2xl p-8 card-hover border border-border relative overflow-hidden"
+              className="group bg-card rounded-3xl p-8 card-hover border border-border relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 gradient-bg opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:opacity-10 transition-opacity" />
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <s.icon className="w-7 h-7 text-primary" />
+              <div className={`w-16 h-16 rounded-2xl ${s.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                <s.icon className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-lg text-foreground mb-2">{s.title}</h3>
+              <h3 className="font-extrabold text-lg text-foreground mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}

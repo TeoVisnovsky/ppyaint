@@ -12,12 +12,12 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent!", description: "Thank you for reaching out. We'll get back to you soon." });
+    toast({ title: "Message sent! 🎉", description: "Thank you for reaching out. We'll get back to you soon." });
     setForm({ name: "", email: "", message: "" });
   };
 
   return (
-    <section id="contact" className="section-padding bg-background">
+    <section id="contact" className="section-padding bg-papaya-light">
       <div className="container-narrow mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -26,9 +26,9 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest">Contact</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-foreground">Let's Connect</h2>
-          <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+          <span className="text-sm font-extrabold text-primary uppercase tracking-widest">Contact</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">Let's Connect 📬</h2>
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
             Have a question, idea, or want to collaborate? We'd love to hear from you.
           </p>
         </motion.div>
@@ -48,7 +48,7 @@ const ContactSection = () => {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
-                className="rounded-xl bg-muted border-border h-12"
+                className="rounded-2xl bg-card border-border h-13 text-base"
               />
             </div>
             <div>
@@ -58,7 +58,7 @@ const ContactSection = () => {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
-                className="rounded-xl bg-muted border-border h-12"
+                className="rounded-2xl bg-card border-border h-13 text-base"
               />
             </div>
             <div>
@@ -68,7 +68,7 @@ const ContactSection = () => {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 required
                 rows={5}
-                className="rounded-xl bg-muted border-border resize-none"
+                className="rounded-2xl bg-card border-border resize-none text-base"
               />
             </div>
             <Button variant="cta" size="lg" type="submit">
@@ -84,32 +84,32 @@ const ContactSection = () => {
             className="space-y-8"
           >
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Mail className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Mail className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground">Email</h4>
+                <h4 className="font-extrabold text-foreground">Email</h4>
                 <p className="text-muted-foreground">info@papayainternational.org</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground">Location</h4>
-                <p className="text-muted-foreground">Bratislava, Slovakia<br />European Union</p>
+                <h4 className="font-extrabold text-foreground">Location</h4>
+                <p className="text-muted-foreground">🇸🇰 Bratislava, Slovakia<br />European Union</p>
               </div>
             </div>
 
             <div>
-              <h4 className="font-bold text-foreground mb-3">Follow Us</h4>
+              <h4 className="font-extrabold text-foreground mb-3">Follow Us</h4>
               <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+                <a href="#" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+                <a href="#" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
                   <Facebook className="w-5 h-5" />
                 </a>
               </div>
