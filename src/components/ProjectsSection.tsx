@@ -18,9 +18,9 @@ const projects: Project[] = [
 ];
 
 const statusConfig = {
-  ongoing: { label: "Ongoing", icon: Clock, color: "bg-secondary text-secondary-foreground" },
-  upcoming: { label: "Upcoming", icon: Calendar, color: "bg-accent text-accent-foreground" },
-  past: { label: "Completed", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+  ongoing: { label: "🟢 Ongoing", icon: Clock, color: "bg-accent/15 text-accent" },
+  upcoming: { label: "🟡 Upcoming", icon: Calendar, color: "bg-papaya-yellow/20 text-papaya-orange" },
+  past: { label: "✅ Completed", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
 };
 
 const fadeUp = {
@@ -33,7 +33,7 @@ const fadeUp = {
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="section-padding bg-muted/50">
+    <section id="projects" className="section-padding bg-papaya-light">
       <div className="container-narrow mx-auto">
         <motion.div
           initial="hidden"
@@ -41,11 +41,11 @@ const ProjectsSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-14"
         >
-          <motion.span variants={fadeUp} custom={0} className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
             Our Projects
           </motion.span>
-          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-4xl font-bold mt-2 text-foreground">
-            Making a Difference, One Project at a Time
+          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
+            Making a Difference 🌍
           </motion.h2>
         </motion.div>
 
@@ -62,21 +62,20 @@ const ProjectsSection = () => {
                 key={p.title}
                 variants={fadeUp}
                 custom={i}
-                className="bg-card rounded-2xl overflow-hidden card-hover border border-border flex flex-col"
+                className="bg-card rounded-3xl overflow-hidden card-hover border border-border flex flex-col"
               >
-                <div className="h-3 gradient-bg" />
+                <div className="h-2 gradient-bg" />
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center gap-2 mb-3">
-                    <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${sc.color}`}>
-                      <sc.icon className="w-3 h-3" />
+                    <span className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full ${sc.color}`}>
                       {sc.label}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{p.title}</h3>
+                  <h3 className="text-lg font-extrabold text-foreground mb-2">{p.title}</h3>
                   <p className="text-sm text-muted-foreground flex-1 mb-4">{p.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {p.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                      <span key={tag} className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-bold">
                         {tag}
                       </span>
                     ))}
