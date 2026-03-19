@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart, Users, Sprout, Globe2 } from "lucide-react";
-import polskoImg from "@/assets/polsko.JPG";
+import polskoImg from "@/assets/polsko.jpg";
 
 const values = [
   { icon: Heart, title: "Inclusion", desc: "Creating spaces where everyone belongs, regardless of background.", color: "bg-primary/10 text-primary" },
