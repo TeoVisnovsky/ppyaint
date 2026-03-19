@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,8 +8,7 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div className="lg:col-span-2">
             <h3 className="font-heading text-2xl font-extrabold mb-3">
-              <span className="text-primary">🥭</span>{" "}
-              <span className="gradient-text">Papaya</span>{" "}
+              <span className="text-papaya-orange">Papaya</span>{" "}
               <span className="text-papaya-peach">International</span>
             </h3>
             <p className="text-papaya-peach/60 text-sm max-w-sm">
@@ -18,10 +18,11 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-papaya-peach mb-3 text-sm">Quick Links</h4>
             <ul className="space-y-2 text-sm text-papaya-peach/60">
-              <li><a href="#about" className="hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#projects" className="hover:text-primary transition-colors">Projects</a></li>
-              <li><a href="#get-involved" className="hover:text-primary transition-colors">Get Involved</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><Link to="/#about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/team" className="hover:text-primary transition-colors">Our Team</Link></li>
+              <li><Link to="/projects" className="hover:text-primary transition-colors">Projects</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">What We Do</Link></li>
+              <li><Link to="/#contact" className="hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </div>
           <div>

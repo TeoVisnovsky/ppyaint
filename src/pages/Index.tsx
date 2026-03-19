@@ -1,27 +1,29 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import TeamSection from "@/components/TeamSection";
-import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import PartnersSection from "@/components/PartnersSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import GetInvolvedSection from "@/components/GetInvolvedSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      const targetId = location.hash.replace("#", "");
+      requestAnimationFrame(() => {
+        const section = document.getElementById(targetId);
+        section?.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen">
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <TeamSection />
-      <ServicesSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <PartnersSection />
-      <GetInvolvedSection />
       <ContactSection />
       <Footer />
     </div>

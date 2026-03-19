@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Send, Instagram, Facebook } from "lucide-react";
+import { Mail, MapPin, Send, Instagram, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
@@ -12,7 +12,11 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent! 🎉", description: "Thank you for reaching out. We'll get back to you soon." });
+    const { name, email, message } = form;
+    const subject = encodeURIComponent(`Papaya contact form from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:papayainternational.bratislava@gmail.com?subject=${subject}&body=${body}`;
+    toast({ title: "Message sent!", description: "Thank you for reaching out. We'll get back to you soon." });
     setForm({ name: "", email: "", message: "" });
   };
 
@@ -27,7 +31,7 @@ const ContactSection = () => {
           className="text-center mb-14"
         >
           <span className="text-sm font-extrabold text-primary uppercase tracking-widest">Contact</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">Let's Connect 📬</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">Let's Connect</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
             Have a question, idea, or want to collaborate? We'd love to hear from you.
           </p>
@@ -89,7 +93,12 @@ const ContactSection = () => {
               </div>
               <div>
                 <h4 className="font-extrabold text-foreground">Email</h4>
-                <p className="text-muted-foreground">info@papayainternational.org</p>
+                <a
+                  href="mailto:papayainternational.bratislava@gmail.com"
+                  className="text-muted-foreground underline-offset-2 hover:text-primary transition-colors"
+                >
+                  papayainternational.bratislava@gmail.com
+                </a>
               </div>
             </div>
 
@@ -99,7 +108,7 @@ const ContactSection = () => {
               </div>
               <div>
                 <h4 className="font-extrabold text-foreground">Location</h4>
-                <p className="text-muted-foreground">🇸🇰 Bratislava, Slovakia<br />European Union</p>
+                <p className="text-muted-foreground">Bratislava, Slovakia</p>
               </div>
             </div>
 
@@ -109,8 +118,13 @@ const ContactSection = () => {
                 <a href="#" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
-                  <Facebook className="w-5 h-5" />
+                <a
+                  href="https://www.linkedin.com/company/papaya-international/?viewAsMember=true"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform"
+                >
+                  <Linkedin className="w-5 h-5" />
                 </a>
               </div>
             </div>

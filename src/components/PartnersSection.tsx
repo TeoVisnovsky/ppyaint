@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-
-const partners = [
-  { name: "Youth Network Europe", country: "🇧🇪 Belgium", desc: "European network supporting youth organizations with capacity building." },
-  { name: "Futuro Joven", country: "🇪🇸 Spain", desc: "Spanish NGO focused on youth participation and social innovation." },
-  { name: "Jugendwerk Berlin", country: "🇩🇪 Germany", desc: "German youth work organization specializing in intercultural exchanges." },
-  { name: "Associazione Giovani", country: "🇮🇹 Italy", desc: "Italian association empowering young people through education and mobility." },
-  { name: "Stowarzyszenie Młodzież", country: "🇵🇱 Poland", desc: "Polish youth organization promoting active citizenship and European values." },
-  { name: "Ung i Norden", country: "🇸🇪 Sweden", desc: "Scandinavian partner focused on inclusivity and sustainable development." },
-];
+import { partners } from "@/data/partners";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -69,7 +61,6 @@ const PartnersSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 gradient-hero-bg rounded-3xl p-8 md:p-12 text-center border border-primary/10"
         >
-          <p className="text-4xl mb-3">🇪🇺</p>
           <p className="text-sm font-extrabold text-primary uppercase tracking-widest mb-2">Co-funded by the European Union</p>
           <h3 className="text-xl md:text-2xl font-extrabold text-foreground mb-4">Erasmus+ Programme</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">

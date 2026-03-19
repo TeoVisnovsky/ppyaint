@@ -1,17 +1,41 @@
 import { motion } from "framer-motion";
+import adamImg from "@/assets/adam.JPG";
+import teoImg from "@/assets/teo.jpeg";
+import marekImg from "@/assets/marek.jpeg";
+import samoImg from "@/assets/samo.jpg";
+import ninaImg from "@/assets/nina.jpg";
 
 const team = [
-  { name: "Anna Kováčová", role: "Founder & Director", bio: "Passionate youth worker with 10+ years in international education and Erasmus+ project management.", emoji: "👩‍💼" },
-  { name: "Marek Horváth", role: "Project Coordinator", bio: "Expert in non-formal education methodologies and youth exchange program design.", emoji: "👨‍🏫" },
-  { name: "Sofia Petrová", role: "Communications Lead", bio: "Creative storyteller dedicated to amplifying youth voices across Europe.", emoji: "📣" },
-  { name: "Tomáš Novák", role: "Training Facilitator", bio: "Dynamic facilitator specializing in personal development and intercultural learning.", emoji: "🎓" },
-];
-
-const bgColors = [
-  "from-primary/20 to-secondary/20",
-  "from-accent/20 to-primary/20",
-  "from-secondary/20 to-papaya-yellow/20",
-  "from-papaya-yellow/20 to-accent/20",
+  {
+    name: "Adam",
+    role: "Project organiser",
+    bio: "More than four years designing youth experiences, handling international collaboration, communication, and representation for Papaya partners.",
+    photo: adamImg,
+  },
+  {
+    name: "Teo",
+    role: "IT support & content creator",
+    bio: "Keeps our digital stack reliable while translating programmes into fresh visuals, recaps, and social content young people relate to.",
+    photo: teoImg,
+  },
+  {
+    name: "Marek",
+    role: "Volunteer & co-founder",
+    bio: "Co-founded Papaya to keep grassroots energy in every exchange and now mentors new volunteers as they step into international projects.",
+    photo: marekImg,
+  },
+  {
+    name: "Samo",
+    role: "Communications lead",
+    bio: "Moves seamlessly across six languages to align expectations, negotiate details, and keep multicultural partners in sync from kickoff to delivery.",
+    photo: samoImg,
+  },
+  {
+    name: "Nina",
+    role: "Project writer & evaluator",
+    bio: "Drafts grant-ready proposals, keeps funding documentation watertight, and steers post-programme evaluation to capture every lesson learned.",
+    photo: ninaImg,
+  },
 ];
 
 const fadeUp = {
@@ -36,7 +60,7 @@ const TeamSection = () => {
             Our Team
           </motion.span>
           <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
-            Meet the Papaya Crew 🍉
+            Meet the Papaya crew
           </motion.h2>
           <motion.p variants={fadeUp} custom={1} className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
             A dedicated team united by a shared passion for youth empowerment and international cooperation.
@@ -47,24 +71,25 @@ const TeamSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {team.map((member, i) => (
             <motion.div
               key={member.name}
               variants={fadeUp}
               custom={i}
-              className="bg-card rounded-3xl overflow-hidden card-hover border border-border"
+              className="bg-card rounded-3xl overflow-hidden card-hover border border-border flex flex-col"
             >
-              <div className={`h-44 bg-gradient-to-br ${bgColors[i]} flex items-center justify-center relative`}>
-                <div className="w-24 h-24 rounded-full bg-card shadow-lg flex items-center justify-center text-4xl">
-                  {member.emoji}
-                </div>
+              <div className="relative h-64 overflow-hidden">
+                <img src={member.photo} alt={member.name} className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
-              <div className="p-6 text-center">
-                <h3 className="font-extrabold text-foreground text-lg">{member.name}</h3>
-                <p className="text-primary text-sm font-bold mb-3">{member.role}</p>
-                <p className="text-sm text-muted-foreground">{member.bio}</p>
+              <div className="p-6 flex flex-col gap-3 text-left">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.3em] text-primary/70 font-bold">{member.role}</p>
+                  <h3 className="font-extrabold text-foreground text-2xl mt-2">{member.name}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
               </div>
             </motion.div>
           ))}

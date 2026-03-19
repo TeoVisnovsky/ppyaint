@@ -1,5 +1,8 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Calendar, CheckCircle2, Clock } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 type Project = {
   title: string;
@@ -32,6 +35,46 @@ const fadeUp = {
 };
 
 const ProjectsSection = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const viewParam = searchParams.get("view");
+  const activeFilter: "all" | "current" | "past" = viewParam === "current" || viewParam === "past" ? viewParam : "all";
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "current") {
+      return projects.filter((project) => project.status === "ongoing" || project.status === "upcoming");
+    }
+    if (activeFilter === "past") {
+      return projects.filter((project) => project.status === "past");
+    }
+    return projects;
+  }, [activeFilter]);
+
+  const handleFilterChange = (nextFilter: "all" | "current" | "past") => {
+    if (nextFilter === activeFilter) return;
+
+    if (nextFilter === "all") {
+      setSearchParams((prev) => {
+        const params = new URLSearchParams(prev);
+        params.delete("view");
+        return params;
+      }, { replace: true });
+      return;
+    }
+
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("view", nextFilter);
+      return params;
+    }, { replace: true });
+  };
+
+  const filters = [
+    { label: "All Projects", value: "all" as const, description: "Full overview" },
+    { label: "Currently Open", value: "current" as const, description: "Live or upcoming" },
+    { label: "Previous Projects", value: "past" as const, description: "Completed journeys" },
+  ];
+
   return (
     <section id="projects" className="section-padding bg-papaya-light">
       <div className="container-narrow mx-auto">
@@ -53,9 +96,46 @@ const ProjectsSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-wrap items-center justify-center gap-3"
+        >
+          {filters.map((filter, index) => (
+            <motion.button
+              key={filter.value}
+              variants={fadeUp}
+              custom={index}
+              type="button"
+              onClick={() => handleFilterChange(filter.value)}
+              className={cn(
+                "rounded-2xl border px-5 py-3 text-left text-sm font-semibold transition-all",
+                activeFilter === filter.value
+                  ? "border-primary bg-white text-primary shadow-lg shadow-primary/10"
+                  : "border-border bg-white/60 text-muted-foreground hover:border-primary/50",
+              )}
+            >
+              <span className="block text-foreground">{filter.label}</span>
+              <span className="text-xs font-normal text-muted-foreground">{filter.description}</span>
+            </motion.button>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projects.map((p, i) => {
+          {filteredProjects.length === 0 && (
+            <motion.div
+              variants={fadeUp}
+              custom={0}
+              className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-dashed border-border bg-card/60 p-10 text-center"
+            >
+              <p className="text-lg font-bold text-foreground">No projects match this filter yet.</p>
+              <p className="text-sm text-muted-foreground mt-2">Check back soon or switch filters to explore other collaborations.</p>
+            </motion.div>
+          )}
+
+          {filteredProjects.map((p, i) => {
             const sc = statusConfig[p.status];
             return (
               <motion.div

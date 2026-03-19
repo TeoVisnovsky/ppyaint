@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart, Users, Sprout, Globe2 } from "lucide-react";
+import polskoImg from "@/assets/polsko.JPG";
 
 const values = [
   { icon: Heart, title: "Inclusion", desc: "Creating spaces where everyone belongs, regardless of background.", color: "bg-primary/10 text-primary" },
@@ -39,16 +40,9 @@ const AboutSection = () => {
             </p>
           </motion.div>
 
-          <motion.div variants={fadeUp} custom={1}>
-            <div className="bg-papaya-light rounded-3xl p-8 md:p-10 border border-primary/10">
-              <h3 className="text-xl font-extrabold text-foreground mb-3">🌟 Our Vision</h3>
-              <p className="text-muted-foreground mb-6">
-                A Europe where every young person has access to transformative learning experiences that empower them to shape their communities and futures.
-              </p>
-              <h3 className="text-xl font-extrabold text-foreground mb-3">🎯 Our Mission</h3>
-              <p className="text-muted-foreground">
-                To design and deliver innovative international projects that foster inclusion, build skills, and connect young people across borders through non-formal education and youth work.
-              </p>
+          <motion.div variants={fadeUp} custom={1} className="flex justify-center mt-10 md:mt-6">
+            <div className="relative w-full max-w-md h-72 md:h-96 rounded-3xl overflow-hidden shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] bg-card">
+              <img src={polskoImg} alt="Papaya International exchange in Poland" className="w-full h-full object-cover" />
             </div>
           </motion.div>
         </motion.div>
@@ -58,6 +52,7 @@ const AboutSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
+          className="mt-28"
         >
           <motion.h3 variants={fadeUp} custom={0} className="text-center text-sm font-extrabold text-primary uppercase tracking-widest mb-2">
             Our Values
@@ -81,6 +76,37 @@ const AboutSection = () => {
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Vision & Mission */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-120px" }}
+          className="grid md:grid-cols-2 gap-8 mt-16"
+        >
+          <motion.article
+            variants={fadeUp}
+            custom={0}
+            className="rounded-3xl border border-primary/20 bg-card p-8 shadow-xl shadow-primary/10"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-primary/70">Our Vision</p>
+            <h3 className="text-2xl font-extrabold text-foreground mt-4 mb-3">Youth work rooted in real communities</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              We see Central Europe where young people feel confident to stay curious, speak up for their neighbourhoods, and move between countries without losing their identity.
+            </p>
+          </motion.article>
+          <motion.article
+            variants={fadeUp}
+            custom={1}
+            className="rounded-3xl border border-secondary/20 bg-papaya-light p-8"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.35em] text-secondary">Our Mission</p>
+            <h3 className="text-2xl font-extrabold text-foreground mt-4 mb-3">Programmes that end with action</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              We co-create exchanges, trainings, and mentoring circles with local schools, municipalities, and youth leaders so every participant leaves with a plan, a network, and the courage to keep going.
+            </p>
+          </motion.article>
         </motion.div>
       </div>
     </section>
