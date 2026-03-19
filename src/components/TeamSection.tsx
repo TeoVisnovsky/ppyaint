@@ -12,6 +12,8 @@ const team = [
     bio: "More than four years designing youth experiences, handling international collaboration, communication, and representation for Papaya partners.",
     photo: adamImg,
   },
+
+  
   {
     name: "Teo",
     role: "IT support & content creator",
