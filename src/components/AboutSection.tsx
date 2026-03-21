@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Heart, Users, Sprout, Globe2 } from "lucide-react";
-import polskoImg from "@/assets/polsko.jpg";
 
 const values = [
   { icon: Heart, title: "Inclusion", desc: "Creating spaces where everyone belongs, regardless of background.", color: "bg-primary/10 text-primary" },
@@ -41,8 +40,13 @@ const AboutSection = () => {
           </motion.div>
 
           <motion.div variants={fadeUp} custom={1} className="flex justify-center mt-10 md:mt-6">
-            <div className="relative w-full max-w-md h-72 md:h-96 rounded-3xl overflow-hidden shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] bg-card">
-              <img src={polskoImg} alt="Papaya International exchange in Poland" className="w-full h-full object-cover" />
+            <div className="relative w-full max-w-md h-72 md:h-96 rounded-3xl overflow-hidden shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] bg-gradient-to-br from-papaya-orange/40 via-primary/40 to-papaya-green/30">
+              <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.8),_transparent_55%)]" />
+              <div className="absolute inset-6 rounded-[32px] border border-white/50" />
+              <div className="absolute bottom-8 left-8 right-8 rounded-2xl border border-white/60 bg-white/10 backdrop-blur-md p-4">
+                <p className="text-xs uppercase tracking-[0.4em] text-white/70">Snapshot</p>
+                <p className="text-lg font-semibold text-white">Moments from our last mobility in Central Europe—captured now as gradients, remembered as milestones.</p>
+              </div>
             </div>
           </motion.div>
         </motion.div>

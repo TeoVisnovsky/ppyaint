@@ -1,10 +1,3 @@
-import photoOne from "@/assets/p1.jpeg";
-import photoTwo from "@/assets/p2.jpeg";
-import photoThree from "@/assets/p3.jpeg";
-import dolomity from "@/assets/dolomity.jpeg";
-import poland from "@/assets/polsko.jpg";
-import heroWorkshop from "@/assets/hero-image.jpg";
-
 export type ServiceStat = {
   label: string;
   value: string;
@@ -15,21 +8,31 @@ export type ServiceFocusArea = {
   description: string;
 };
 
+export type ServiceVisual = {
+  gradient: string;
+  icon: string;
+  caption: string;
+};
+
+export type ServiceSnapshot = {
+  title: string;
+  description: string;
+};
+
 export type ServiceDetail = {
   id: string;
   title: string;
   kicker: string;
   description: string;
   summary: string;
-  image: string;
-  imageAlt: string;
+  visual: ServiceVisual;
   bullets: string[];
   stats: ServiceStat[];
   detail: {
     longDescription: string;
     focusAreas: ServiceFocusArea[];
     commitments: string[];
-    gallery: string[];
+    snapshots: ServiceSnapshot[];
     contact: {
       name: string;
       role: string;
@@ -47,8 +50,11 @@ export const servicesData: ServiceDetail[] = [
       "Small groups of 13–30-year-olds spend one to three weeks living together abroad, sharing cultures, cooking, and diving into hands-on workshops that make Europe feel personal.",
     summary:
       "We specialise in hosting youth exchanges that feel bold, safe, and rooted in the host community. Every mobility includes cultural mediation, inclusion support, and mentoring that continues once everyone is back home.",
-    image: photoOne,
-    imageAlt: "Papaya youth exchange in action",
+    visual: {
+      gradient: "from-papaya-orange via-primary to-papaya-yellow",
+      icon: "🌍",
+      caption: "Co-created youth exchanges across Europe",
+    },
     bullets: [
       "Daily non-formal sessions mix creative challenges with reflection so confidence builds naturally.",
       "Evenings spotlight each partner country—food, music, and stories that turn strangers into friends.",
@@ -81,7 +87,20 @@ export const servicesData: ServiceDetail[] = [
         "Personal growth trackers for every participant",
         "Tailored dissemination assets ready for grant reporting",
       ],
-      gallery: [poland, dolomity, photoOne],
+      snapshots: [
+        {
+          title: "Community rooted",
+          description: "Neighbourhood walks and host family dinners keep participants connected to the local context instead of staying in a project bubble.",
+        },
+        {
+          title: "Participant-led moments",
+          description: "Teams curate nightly cultural pop-ups, ensuring every voice shapes the shared experience.",
+        },
+        {
+          title: "Action plans",
+          description: "Each exchange closes with concrete follow-up steps that partners can plug straight into ongoing youth strategies.",
+        },
+      ],
       contact: {
         name: "Adam",
         role: "Project organiser & Erasmus+ lead",
@@ -97,8 +116,11 @@ export const servicesData: ServiceDetail[] = [
       "Youth workers and educators join us for 5–10 day labs where we unpack inclusive facilitation, digital tools, and storytelling techniques that can plug straight into their programmes.",
     summary:
       "Our trainings pair immersive learning with ready-made toolkits. Each cohort leaves with tested session plans, blended learning templates, and a support thread that keeps the cohort sharing wins long after the course.",
-    image: photoTwo,
-    imageAlt: "Facilitators leading a training course",
+    visual: {
+      gradient: "from-secondary via-papaya-green to-primary",
+      icon: "🧠",
+      caption: "Labs for youth workers and educators",
+    },
     bullets: [
       "Cohorts co-create session plans, test them in micro-teaching slots, and collect instant peer feedback.",
       "Resource packs cover hybrid delivery, safeguarding, and templates ready for grant annexes.",
@@ -131,7 +153,20 @@ export const servicesData: ServiceDetail[] = [
         "Accessibility-first session design",
         "A community channel that stays open for peer exchange",
       ],
-      gallery: [heroWorkshop, photoTwo, dolomity],
+      snapshots: [
+        {
+          title: "Lab energy",
+          description: "Micro-teaching rounds turn ideas into tested workshops before participants fly home.",
+        },
+        {
+          title: "Toolkit shelf",
+          description: "Shared drives hold ready-made templates so teams can implement on Monday morning.",
+        },
+        {
+          title: "Alumni thread",
+          description: "Monthly check-ins keep the conversation alive and celebrate each rollout.",
+        },
+      ],
       contact: {
         name: "Nina",
         role: "Project writer & evaluator",
@@ -147,8 +182,11 @@ export const servicesData: ServiceDetail[] = [
       "Individual students aged 15–30 spend two to twelve months studying abroad with our team handling matching, host onboarding, and the soft landings that make a long stay feel safe.",
     summary:
       "We combine host matching, cultural preparation, and wraparound care so long-term mobilities feel sustainable. Students co-create learning goals and share monthly reflections that feed into their schools' accreditation process.",
-    image: photoThree,
-    imageAlt: "Students during a long-term exchange",
+    visual: {
+      gradient: "from-papaya-green via-accent to-papaya-orange",
+      icon: "✈️",
+      caption: "Mentored placements that last months",
+    },
     bullets: [
       "Pre-departure labs bring together students, families, and schools to align goals and expectations.",
       "Local mentors check in weekly, translating bureaucracy and helping each milestone feel manageable.",
@@ -181,7 +219,20 @@ export const servicesData: ServiceDetail[] = [
         "Inclusive housing and accessibility planning",
         "Career guidance linking the exchange to next-step opportunities",
       ],
-      gallery: [photoThree, heroWorkshop, poland],
+      snapshots: [
+        {
+          title: "Wellbeing calls",
+          description: "Mentors schedule structured reflections so students can process challenges early.",
+        },
+        {
+          title: "Local anchors",
+          description: "City hosts prepare cultural briefings that make bureaucracy feel navigable.",
+        },
+        {
+          title: "Reintegration",
+          description: "Transition toolkits tie the stay abroad to school credits and future plans.",
+        },
+      ],
       contact: {
         name: "Samo",
         role: "Communications & placements lead",
