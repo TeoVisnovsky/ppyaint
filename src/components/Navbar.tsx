@@ -7,11 +7,10 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "About", to: "/#about" },
-  { label: "Team", to: "/team" },
-  { label: "What We Do", to: "/services" },
+  { label: "Services", to: "/services" },
   { label: "Projects", to: "/projects" },
+  { label: "Team", to: "/team" },
   { label: "Partners", to: "/partners" },
-  { label: "Contact", to: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -101,6 +100,16 @@ const Navbar = () => {
                   >
                     <div className="rounded-3xl border border-border bg-card shadow-xl shadow-primary/10 p-3 flex flex-col gap-1">
                       <Link
+                        to="/projects"
+                        className={cn(
+                          "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
+                          location.pathname === "/projects" && !projectsView && "bg-primary/10 text-primary",
+                        )}
+                      >
+                        <p className="text-sm font-bold">All Projects</p>
+                        <span className="text-xs text-muted-foreground">Complete portfolio and program overview</span>
+                      </Link>
+                      <Link
                         to="/projects?view=current"
                         className={cn(
                           "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
@@ -189,6 +198,19 @@ const Navbar = () => {
                       {projectsMobileOpen && (
                         <div className="flex flex-col gap-2 pb-3">
                           <Link
+                            to="/projects"
+                            className={cn(
+                              "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
+                              location.pathname === "/projects" && !projectsView && "bg-primary/10 text-primary",
+                            )}
+                            onClick={() => {
+                              setMobileOpen(false);
+                              setProjectsMobileOpen(false);
+                            }}
+                          >
+                            All Projects
+                          </Link>
+                          <Link
                             to="/projects?view=current"
                             className={cn(
                               "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
@@ -234,7 +256,7 @@ const Navbar = () => {
                 );
               })}
               <Button variant="cta" size="sm" className="mt-2" asChild>
-                <Link to="/#contact" onClick={() => setMobileOpen(false)}>Contact us</Link>
+                <Link to="/#contact" onClick={() => setMobileOpen(false)}>Get in touch</Link>
               </Button>
             </div>
           </motion.div>
