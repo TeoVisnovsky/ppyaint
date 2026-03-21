@@ -1,122 +1,126 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Leaf, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { servicesData } from "@/data/services";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.08, duration: 0.6 },
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.6, ease: "easeOut" },
   }),
 };
 
-const floatingIcons = [
-  { Icon: Star, className: "hidden lg:block w-12 h-12 text-papaya-yellow/30 top-10 left-[8%]", delay: 0 },
-  { Icon: Heart, className: "hidden lg:block w-10 h-10 text-primary/20 top-1/3 right-[6%]", delay: 0.4 },
-  { Icon: Leaf, className: "hidden lg:block w-12 h-12 text-accent/25 bottom-12 left-[15%]", delay: 0.8 },
-];
-
 const ServicesSection = () => {
+  const imageRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["end end", "start start"],
+  });
+  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.4, 0.7]);
   return (
-    <section id="services" className="relative section-padding bg-background overflow-hidden">
-      {floatingIcons.map(({ Icon, className, delay }, index) => (
-        <motion.div
-          key={index}
-          className={`absolute ${className}`}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 + delay, duration: 0.6 }}
-        >
+    <section id="services" className="bg-background">
+      <div className="section-padding py-8 md:py-12 bg-background">
+        <div className="container-narrow mx-auto space-y-3">
           <motion.div
-            animate={{ y: [0, -6, 0], rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4 + delay, repeat: Infinity, ease: "easeInOut" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={fadeUp}
+            custom={0}
           >
-            <Icon className="w-full h-full" />
+            <span className="text-sm font-extrabold uppercase tracking-[0.35em] text-primary">What we do</span>
           </motion.div>
-        </motion.div>
-      ))}
 
-      <div className="relative z-10 container-narrow mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-120px" }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
-            What We Do
-          </motion.span>
-          <motion.h2 variants={fadeUp} custom={0} className="text-3xl md:text-5xl font-extrabold mt-3 text-foreground">
-            Youth pathways with real follow-up
-          </motion.h2>
-          <motion.p variants={fadeUp} custom={1} className="text-muted-foreground leading-relaxed text-lg mt-4">
-            We keep programmes intimate, mentored, and focused on what happens after the mobility. Every pathway below combines non-formal
-            education, mentoring, and strong partner coordination so young people can test ideas and bring them home.
-          </motion.p>
-        </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={fadeUp}
+            custom={1}
+            className="max-w-3xl"
+          >
+            <h2 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+              Activities that matter, impact that lasts
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              We create pathways for young people to explore the world, build lasting friendships, and bring their growth back home.
+            </p>
+          </motion.div>
+        </div>
+      </div>
 
-        <div className="mt-16 space-y-16">
-          {servicesData.map((service, index) => {
-            const isEven = index % 2 === 0;
-            const textOrder = isEven ? "md:order-1" : "md:order-2";
-            const imageOrder = isEven ? "md:order-2" : "md:order-1";
+      <motion.div
+        ref={imageRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-120px" }}
+        variants={fadeUp}
+        custom={2}
+        className="relative overflow-hidden h-96 md:h-[500px] w-full"
+      >
+        <div className="relative h-full w-full bg-gradient-to-br from-papaya-orange via-primary to-papaya-green">
+          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.7),_transparent_50%)]" />
+          <div className="absolute inset-10 border border-white/30 rounded-[48px]" />
+        </div>
+        <motion.div className="absolute inset-0 bg-black" style={{ opacity: overlayOpacity }} />
+      </motion.div>
 
-            return (
-              <motion.article
-                key={service.id}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-120px" }}
-                variants={fadeUp}
-                custom={index + 2}
-                className="rounded-[40px] border border-border bg-card/70 backdrop-blur-sm shadow-xl shadow-primary/5 p-6 sm:p-10"
-              >
-                <div className={`grid gap-10 items-center ${isEven ? "md:grid-cols-[1.1fr_0.9fr]" : "md:grid-cols-[0.9fr_1.1fr]"}`}>
-                  <div className={`space-y-5 order-2 ${textOrder}`}>
-                    <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-primary">{service.kicker}</span>
-                    <h3 className="text-3xl font-extrabold text-foreground">{service.title}</h3>
-                    <p className="text-muted-foreground text-lg leading-relaxed">{service.description}</p>
+      <div className="section-padding bg-background">
+        <div className="container-narrow mx-auto space-y-20">
 
-                    <ul className="space-y-3">
-                      {service.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
-                          <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-6 text-sm font-semibold text-foreground/80">
-                      {service.stats.map((stat) => (
-                        <div key={stat.label}>
-                          <p className="text-2xl font-extrabold text-foreground">{stat.value}</p>
-                          <p className="uppercase tracking-widest text-xs text-muted-foreground">{stat.label}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <Button variant="outline" size="lg" asChild>
-                      <Link to={`/services/${service.id}`}>
-                        Explore more <ArrowRight className="ml-2 w-4 h-4" />
-                      </Link>
-                    </Button>
-                  </div>
-
-                  <div className={`order-1 ${imageOrder}`}>
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/10 blur-3xl rounded-[48px]" />
-                      <div className="relative rounded-[36px] overflow-hidden border border-white/60 shadow-2xl shadow-primary/15">
-                        <img src={service.image} alt={service.imageAlt} className="w-full h-full object-cover" loading="lazy" />
-                      </div>
-                    </div>
+          <div className="space-y-20">
+          {servicesData.map((service, index) => (
+            <motion.article
+              key={service.id}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-120px" }}
+              variants={fadeUp}
+              custom={index + 1}
+              className="rounded-[36px] border border-border/70 bg-card/90 p-8 md:p-10 shadow-[0_18px_60px_rgba(15,23,42,0.06)]"
+            >
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-wrap items-center gap-4">
+                  <span className="text-5xl font-black text-primary/25 leading-none">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <p className="text-xs font-extrabold uppercase tracking-[0.35em] text-primary">{service.kicker}</p>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mt-1">{service.title}</h3>
                   </div>
                 </div>
-              </motion.article>
-            );
-          })}
+
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{service.summary}</p>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  {service.bullets.slice(0, 2).map((bullet) => (
+                    <div key={bullet} className="flex items-start gap-3 rounded-3xl border border-border/60 bg-background/70 p-4">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
+                      <p className="text-sm text-muted-foreground leading-relaxed">{bullet}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  {service.stats.map((stat) => (
+                    <div key={stat.label} className="min-w-[120px] rounded-3xl border border-border/60 bg-background/80 px-4 py-3 text-center">
+                      <p className="text-2xl font-extrabold text-foreground">{stat.value}</p>
+                      <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <Button variant="ghost" className="px-0 text-primary hover:text-primary/80" asChild>
+                  <Link to={`/services/${service.id}`} className="inline-flex items-center gap-2 text-base font-semibold">
+                    Read the full pathway <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.article>
+          ))}
+          </div>
         </div>
       </div>
     </section>

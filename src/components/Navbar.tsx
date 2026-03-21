@@ -140,7 +140,7 @@ const Navbar = () => {
               </Link>
             );
           })}
-          <Button variant="cta" size="sm" asChild>
+          <Button variant="default" size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
             <Link to="/#contact">Contact us</Link>
           </Button>
           <div className="flex gap-2 ml-1">

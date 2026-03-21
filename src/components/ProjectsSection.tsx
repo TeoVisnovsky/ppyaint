@@ -1,193 +1,281 @@
-import { useMemo } from "react";
-import { Calendar, CheckCircle2, Clock, Users, Building2, MapPin } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
-import { cn } from "@/lib/utils";
-import { projects } from "@/data/projects";
+import { motion } from "framer-motion";
+import { Star, Sun, Heart, Leaf, Sparkles } from "lucide-react";
 
-const statusConfig = {
-  ongoing: { label: "Ongoing", icon: Clock, color: "bg-accent/15 text-accent" },
-  upcoming: { label: "Upcoming", icon: Calendar, color: "bg-papaya-yellow/20 text-papaya-orange" },
-  past: { label: "Completed", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+// Floating decorative elements
+const floatingElements = [
+  { Icon: Star, className: "top-[2%] left-[2%] text-papaya-orange/20", delay: 0 },
+  { Icon: Sun, className: "top-[8%] right-[3%] text-papaya-yellow/20", delay: 0.3 },
+  { Icon: Heart, className: "top-[1%] right-[25%] text-primary/18", delay: 0.6 },
+  { Icon: Leaf, className: "bottom-[2%] left-[1%] text-accent/20", delay: 0.9 },
+  { Icon: Sparkles, className: "bottom-[3%] right-[2%] text-papaya-green/20", delay: 0.4 },
+  { Icon: Star, className: "top-[25%] right-[1%] text-papaya-orange/18", delay: 0.8 },
+  { Icon: Heart, className: "bottom-[15%] right-[5%] text-primary/18", delay: 0.2 },
+  { Icon: Leaf, className: "top-[35%] left-[1%] text-accent/20", delay: 1.1 },
+  { Icon: Sun, className: "bottom-[20%] left-[2%] text-papaya-yellow/18", delay: 0.5 },
+  { Icon: Star, className: "bottom-[1%] left-[18%] text-papaya-orange/18", delay: 0.7 },
+  { Icon: Sparkles, className: "top-[15%] left-[3%] text-papaya-green/20", delay: 0.6 },
+  { Icon: Heart, className: "top-[50%] right-[8%] text-primary/18", delay: 1.0 },
+  { Icon: Leaf, className: "bottom-[8%] right-[20%] text-accent/20", delay: 0.3 },
+  { Icon: Sun, className: "bottom-[1%] left-[60%] text-papaya-yellow/18", delay: 0.9 },
+  { Icon: Star, className: "top-[5%] right-[40%] text-papaya-orange/18", delay: 0.4 },
+  { Icon: Sparkles, className: "bottom-[25%] left-[35%] text-papaya-green/20", delay: 0.8 },
+];
+
+type Project = {
+  id: string;
+  title: string;
+  status: "current" | "past";
+  date: string;
+  location: string;
+  dateRange: string;
+  palette: string;
+  symbol: string;
+};
+
+const projects: Project[] = [
+  // Current/upcoming projects (above the divider)
+  { id: "1", title: "Bridges of Understanding", status: "current", date: "2025", location: "Bochum, Nemecko", dateRange: "15.3. - 21.3.2026", palette: "from-papaya-orange via-primary to-papaya-yellow", symbol: "🌉" },
+  { id: "2", title: "Digital Skills for All", status: "current", date: "2025", location: "Bratislava, Slovensko", dateRange: "10.4. - 15.4.2026", palette: "from-secondary via-papaya-green to-accent", symbol: "💻" },
+  { id: "3", title: "Green Futures", status: "current", date: "2026", location: "Berlín, Nemecko", dateRange: "1.5. - 8.5.2026", palette: "from-papaya-green via-accent to-primary", symbol: "🌱" },
+
+  // Past projects (below the divider)
+  { id: "4", title: "Voices Unheard", status: "past", date: "2024", location: "Varšava, Poľsko", dateRange: "5.6. - 12.6.2024", palette: "from-muted via-secondary to-primary", symbol: "🎙️" },
+  { id: "5", title: "EuroConnect", status: "past", date: "2023", location: "Madrid, Španielsko", dateRange: "20.7. - 28.7.2023", palette: "from-secondary via-papaya-yellow to-primary", symbol: "🤝" },
+  { id: "6", title: "Active Citizens Lab", status: "past", date: "2023", location: "Riga, Litva", dateRange: "15.8. - 22.8.2023", palette: "from-accent via-primary to-papaya-orange", symbol: "🧪" },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.6, ease: "easeOut" },
+  }),
 };
 
 const ProjectsSection = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const viewParam = searchParams.get("view");
-  const activeFilter: "all" | "current" | "past" = viewParam === "current" || viewParam === "past" ? viewParam : "all";
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === "current") {
-      return projects.filter((project) => project.status === "ongoing" || project.status === "upcoming");
-    }
-    if (activeFilter === "past") {
-      return projects.filter((project) => project.status === "past");
-    }
-    return projects;
-  }, [activeFilter]);
-
-  const handleFilterChange = (nextFilter: "all" | "current" | "past") => {
-    if (nextFilter === activeFilter) return;
-
-    if (nextFilter === "all") {
-      setSearchParams((prev) => {
-        const params = new URLSearchParams(prev);
-        params.delete("view");
-        return params;
-      }, { replace: true });
-      return;
-    }
-
-    setSearchParams((prev) => {
-      const params = new URLSearchParams(prev);
-      params.set("view", nextFilter);
-      return params;
-    }, { replace: true });
-  };
-
-  const filters = [
-    { label: "All Projects", value: "all" as const, description: "Complete portfolio" },
-    { label: "Open Calls", value: "current" as const, description: "Ongoing and upcoming" },
-    { label: "Completed", value: "past" as const, description: "Finished initiatives" },
-  ];
-
-  const stats = useMemo(() => {
-    const ongoing = projects.filter((project) => project.status === "ongoing").length;
-    const upcoming = projects.filter((project) => project.status === "upcoming").length;
-    const completed = projects.filter((project) => project.status === "past").length;
-
-    const totalParticipants = projects.reduce((sum, project) => sum + project.participants, 0);
-    const totalPartners = projects.reduce((sum, project) => sum + project.partners, 0);
-
-    return { ongoing, upcoming, completed, totalParticipants, totalPartners };
-  }, []);
+  const currentProjects = projects.filter((p) => p.status === "current");
+  const pastProjects = projects.filter((p) => p.status === "past");
 
   return (
-    <section id="projects" className="section-padding bg-papaya-light">
-      <div className="container-narrow mx-auto">
-        <div className="text-center mb-10">
-          <span className="text-sm font-extrabold text-primary uppercase tracking-widest">
-            Our Projects
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold mt-2 text-foreground">
-            Programmes With Measurable Impact
-          </h1>
-          <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto mt-4">
-            Explore our active and completed initiatives across youth exchanges, training courses, and partnership-driven projects.
-          </p>
-        </div>
+    <section id="projects" className="section-padding bg-background relative overflow-hidden">
+      {/* Floating decorative elements */}
+      {floatingElements.map(({ Icon, className, delay }, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay, duration: 0.5 }}
+          viewport={{ once: true }}
+          className={`absolute hidden md:block pointer-events-none ${className}`}
+        >
+          <motion.div
+            animate={{ y: [0, -8, 0], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 3 + delay, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Icon className="w-6 h-6 md:w-8 md:h-8" />
+          </motion.div>
+        </motion.div>
+      ))}
+      <div className="mx-auto max-w-6xl relative z-10">
+        {/* Header */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-24"
+        >
+          <motion.span variants={fadeUp} custom={0} className="text-sm font-extrabold text-primary uppercase tracking-widest">
+            Our Journey
+          </motion.span>
+          <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-6xl font-extrabold mt-3 text-foreground">
+            Projects Timeline
+          </motion.h2>
+        </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-8">
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Ongoing</p>
-            <p className="text-2xl font-extrabold text-foreground mt-2">{stats.ongoing}</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Upcoming</p>
-            <p className="text-2xl font-extrabold text-foreground mt-2">{stats.upcoming}</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Completed</p>
-            <p className="text-2xl font-extrabold text-foreground mt-2">{stats.completed}</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Participants</p>
-            <p className="text-2xl font-extrabold text-foreground mt-2">{stats.totalParticipants}+</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-card p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Partners</p>
-            <p className="text-2xl font-extrabold text-foreground mt-2">{stats.totalPartners}</p>
-          </div>
-        </div>
+        {/* Timeline Container */}
+        <div className="relative">
+          {/* Dashed Orange Vertical Timeline Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full" 
+               style={{
+                 background: `repeating-linear-gradient(
+                   to bottom,
+                   rgb(255, 107, 53) 0px,
+                   rgb(255, 107, 53) 20px,
+                   transparent 20px,
+                   transparent 35px
+                 )`,
+               }} 
+          />
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-          {filters.map((filter) => (
-            <button
-              key={filter.value}
-              type="button"
-              onClick={() => handleFilterChange(filter.value)}
-              className={cn(
-                "rounded-2xl border px-5 py-3 text-left text-sm font-semibold transition-all",
-                activeFilter === filter.value
-                  ? "border-primary bg-white text-primary shadow-lg shadow-primary/10"
-                  : "border-border bg-white/60 text-muted-foreground hover:border-primary/50",
-              )}
+          {/* Content - Full Width Alternating Layout */}
+          <div className="space-y-3">
+            {/* Current Projects */}
+            {currentProjects.map((project, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <motion.div
+                  key={project.id}
+                  variants={fadeUp}
+                  custom={index}
+                  className={`relative flex items-center ${isLeft ? "justify-start" : "justify-end"} pt-0`}
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-10">
+                    <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
+                  </div>
+
+                  {/* Curved Arrow Connector */}
+                  <svg
+                    className="absolute top-2 h-40 left-1/2 -translate-x-1/2"
+                    width="420"
+                    height="150"
+                    viewBox="0 0 420 150"
+                    fill="none"
+                    style={{ opacity: 0.8 }}
+                  >
+                    {isLeft ? (
+                      <>
+                        <path
+                          d="M 210 0 Q 120 30, 30 90 Q 10 105, 0 115"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="text-primary"
+                          strokeDasharray="6,6"
+                          fill="none"
+                        />
+                        <polygon points="0,115 -8,125 8,135" fill="currentColor" className="text-primary" />
+                      </>
+                    ) : (
+                      <>
+                        <path
+                          d="M 210 0 Q 300 30, 390 90 Q 410 105, 420 115"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="text-primary"
+                          strokeDasharray="6,6"
+                          fill="none"
+                        />
+                        <polygon points="420,115 428,125 412,135" fill="currentColor" className="text-primary" />
+                      </>
+                    )}
+                  </svg>
+
+                  {/* Project Bubble */}
+                  <motion.div
+                    whileHover={{ scale: 1.08 }}
+                    className={`w-96 cursor-pointer group ${isLeft ? "mr-12" : "ml-12"}`}
+                  >
+                    <div className="relative rounded-full overflow-hidden mb-4 h-96 w-96 shadow-lg group-hover:shadow-xl transition-shadow ring-4 ring-primary/80 group-hover:ring-primary">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette}`} />
+                      <div className="absolute inset-4 rounded-full border-2 border-white/40" />
+                      <div className="absolute inset-0 flex items-center justify-center text-7xl">
+                        <span>{project.symbol}</span>
+                      </div>
+                      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.6),_transparent_50%)]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground text-center group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground text-center mt-2">{project.location}</p>
+                    <p className="text-xs font-light text-muted-foreground text-center mt-1">{project.dateRange}</p>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+
+            {/* Divider with Milestone */}
+            <motion.div
+              variants={fadeUp}
+              custom={currentProjects.length}
+              className="relative pt-1 pb-1"
             >
-              <span className="block text-foreground">{filter.label}</span>
-              <span className="text-xs font-normal text-muted-foreground">{filter.description}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.length === 0 && (
-            <div className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-dashed border-border bg-card/60 p-10 text-center">
-              <p className="text-lg font-bold text-foreground">No projects match this filter yet.</p>
-              <p className="text-sm text-muted-foreground mt-2">Switch filters to view all initiatives and project history.</p>
-            </div>
-          )}
-
-          {filteredProjects.map((p, i) => {
-            const sc = statusConfig[p.status];
-            const StatusIcon = sc.icon;
-
-            return (
-              <article
-                key={p.title}
-                className="bg-card rounded-3xl overflow-hidden card-hover border border-border flex flex-col"
-              >
-                <div className="h-2 gradient-bg" />
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className={`inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full ${sc.color}`}>
-                      <StatusIcon className="w-3.5 h-3.5" />
-                      {sc.label}
-                    </span>
-                    <span className="text-xs font-medium text-muted-foreground">Project {i + 1}</span>
-                  </div>
-                  <h3 className="text-lg font-extrabold text-foreground mb-2">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{p.summary}</p>
-
-                  <div className="space-y-2 text-sm text-foreground/90 mb-5">
-                    <p className="font-semibold text-foreground">{p.programme}</p>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
-                      <span>{p.period}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <MapPin className="w-4 h-4" />
-                      <span>{p.location}</span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="rounded-xl bg-muted/70 px-3 py-2">
-                      <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Partners</p>
-                      <p className="font-bold text-foreground inline-flex items-center gap-1">
-                        <Building2 className="w-3.5 h-3.5" />
-                        {p.partners}
-                      </p>
-                    </div>
-                    <div className="rounded-xl bg-muted/70 px-3 py-2">
-                      <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Participants</p>
-                      <p className="font-bold text-foreground inline-flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5" />
-                        {p.participants}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {p.focusAreas.map((area) => (
-                      <span key={area} className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-semibold">
-                        {area}
-                      </span>
-                    ))}
-                  </div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-10 -top-4">
+                <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
+              </div>
+              <div className="flex justify-center pt-1">
+                <div className="bg-background px-6 py-3 rounded-full border-2 border-primary">
+                  <span className="text-sm font-bold text-foreground">
+                    🚀 March 2026 - Organization Founded
+                  </span>
                 </div>
-              </article>
-            );
-          })}
+              </div>
+            </motion.div>
+
+            {/* Past Projects */}
+            {pastProjects.map((project, index) => {
+              const isLeft = (currentProjects.length + index) % 2 === 0;
+              return (
+                <motion.div
+                  key={project.id}
+                  variants={fadeUp}
+                  custom={currentProjects.length + 1 + index}
+                  className={`relative flex items-center ${isLeft ? "justify-start" : "justify-end"} pt-8`}
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-10">
+                    <div className="w-8 h-8 rounded-full bg-muted ring-4 ring-background" />
+                  </div>
+
+                  {/* Curved Arrow Connector */}
+                  <svg
+                    className="absolute top-2 h-40 left-1/2 -translate-x-1/2"
+                    width="420"
+                    height="150"
+                    viewBox="0 0 420 150"
+                    fill="none"
+                    style={{ opacity: 0.5 }}
+                  >
+                    {isLeft ? (
+                      <>
+                        <path
+                          d="M 210 0 Q 120 30, 30 90 Q 10 105, 0 115"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="text-muted-foreground"
+                          strokeDasharray="6,6"
+                          fill="none"
+                        />
+                        <polygon points="0,115 -8,125 8,135" fill="currentColor" className="text-muted-foreground" />
+                      </>
+                    ) : (
+                      <>
+                        <path
+                          d="M 210 0 Q 300 30, 390 90 Q 410 105, 420 115"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          className="text-muted-foreground"
+                          strokeDasharray="6,6"
+                          fill="none"
+                        />
+                        <polygon points="420,115 428,125 412,135" fill="currentColor" className="text-muted-foreground" />
+                      </>
+                    )}
+                  </svg>
+
+                  {/* Past Project Bubble - Grayscale with color on hover */}
+                  <motion.div
+                    whileHover={{ scale: 1.08 }}
+                    className={`w-96 cursor-pointer group ${isLeft ? "mr-12" : "ml-12"}`}
+                  >
+                    <div className="relative rounded-full overflow-hidden mb-4 h-96 w-96 shadow-lg group-hover:shadow-xl transition-all ring-4 ring-muted group-hover:ring-primary/80">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
+                      <div className="absolute inset-6 rounded-full border border-white/30 group-hover:border-white/60" />
+                      <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                        <span>{project.symbol}</span>
+                      </div>
+                      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(135deg,_rgba(255,255,255,0.5)_0%,_transparent_35%,_transparent_70%,_rgba(0,0,0,0.1)_100%)]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-muted-foreground group-hover:text-foreground text-center transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground text-center mt-2">{project.location}</p>
+                    <p className="text-xs font-light text-muted-foreground text-center mt-1">{project.dateRange}</p>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

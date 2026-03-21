@@ -62,8 +62,17 @@ const ServiceDetailPage = () => {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/15 blur-3xl rounded-[48px]" />
-              <div className="relative rounded-[40px] overflow-hidden border border-white/50 shadow-2xl shadow-primary/10">
-                <img src={service.image} alt={service.imageAlt} className="w-full h-full object-cover" />
+              <div className="relative rounded-[40px] overflow-hidden border border-white/50 shadow-2xl shadow-primary/10 h-80 flex items-center justify-center">
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.visual.gradient}`} />
+                <div className="absolute inset-6 rounded-[32px] border border-white/40" />
+                <div className="relative z-10 text-center px-6 flex flex-col items-center gap-2">
+                  <span className="text-6xl" aria-hidden>
+                    {service.visual.icon}
+                  </span>
+                  <p className="text-white font-semibold text-lg leading-snug">
+                    {service.visual.caption}
+                  </p>
+                </div>
               </div>
             </div>
           </motion.section>
@@ -105,9 +114,10 @@ const ServiceDetailPage = () => {
           >
             <h2 className="text-2xl font-extrabold text-foreground mb-6">Snapshots from the field</h2>
             <div className="grid sm:grid-cols-3 gap-4">
-              {detail.gallery.map((src, idx) => (
-                <div key={src + idx} className="rounded-3xl overflow-hidden border border-white/30 shadow-lg">
-                  <img src={src} alt={`${service.title} gallery image ${idx + 1}`} className="w-full h-44 object-cover" loading="lazy" />
+              {detail.snapshots.map((snapshot) => (
+                <div key={snapshot.title} className="rounded-3xl border border-white/20 bg-gradient-to-br from-card to-background/60 p-5 shadow-lg">
+                  <p className="text-xs uppercase tracking-[0.35em] text-primary mb-2">{snapshot.title}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{snapshot.description}</p>
                 </div>
               ))}
             </div>

@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
-import adamImg from "@/assets/adam.jpg";
-import teoImg from "@/assets/teo.jpeg";
-import marekImg from "@/assets/marek.jpeg";
-import samoImg from "@/assets/samo.jpg";
-import ninaImg from "@/assets/nina.jpg";
 
 const team = [
   {
     name: "Adam",
     role: "Project organiser",
     bio: "More than four years designing youth experiences, handling international collaboration, communication, and representation for Papaya partners.",
-    photo: adamImg,
+    initials: "AD",
+    gradient: "from-papaya-orange via-primary to-papaya-yellow",
   },
 
   
@@ -18,25 +14,29 @@ const team = [
     name: "Teo",
     role: "IT support & content creator",
     bio: "Keeps our digital stack reliable while translating programmes into fresh visuals, recaps, and social content young people relate to.",
-    photo: teoImg,
+    initials: "TE",
+    gradient: "from-secondary via-papaya-green to-accent",
   },
   {
     name: "Marek",
     role: "Volunteer & co-founder",
     bio: "Co-founded Papaya to keep grassroots energy in every exchange and now mentors new volunteers as they step into international projects.",
-    photo: marekImg,
+    initials: "MA",
+    gradient: "from-papaya-yellow via-primary to-secondary",
   },
   {
     name: "Samo",
     role: "Communications lead",
     bio: "Moves seamlessly across six languages to align expectations, negotiate details, and keep multicultural partners in sync from kickoff to delivery.",
-    photo: samoImg,
+    initials: "SA",
+    gradient: "from-primary via-papaya-orange to-papaya-dark",
   },
   {
     name: "Nina",
     role: "Project writer & evaluator",
     bio: "Drafts grant-ready proposals, keeps funding documentation watertight, and steers post-programme evaluation to capture every lesson learned.",
-    photo: ninaImg,
+    initials: "NI",
+    gradient: "from-papaya-green via-secondary to-primary",
   },
 ];
 
@@ -83,8 +83,12 @@ const TeamSection = () => {
               className="bg-card rounded-3xl overflow-hidden card-hover border border-border flex flex-col"
             >
               <div className="relative h-64 overflow-hidden">
-                <img src={member.photo} alt={member.name} className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div
+                  className={`w-full h-full flex items-center justify-center text-5xl font-black text-white bg-gradient-to-br ${member.gradient}`}
+                >
+                  <span>{member.initials}</span>
+                </div>
+                <div className="absolute inset-0 mix-blend-soft-light bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.3),_transparent_60%)]" />
               </div>
               <div className="p-6 flex flex-col gap-3 text-left">
                 <div>

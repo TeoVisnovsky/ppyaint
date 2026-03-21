@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Sparkles, Sun, Heart, Leaf, Globe } from "lucide-react";
-import papayaImg from "@/assets/papaya-hero.png";
 
 const floatingIcons = [
   { Icon: Star, className: "top-[15%] right-[8%] text-papaya-orange/30", delay: 0 },
@@ -85,7 +84,7 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right papaya image */}
+          {/* Right abstract visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -93,14 +92,26 @@ const HeroSection = () => {
             className="relative flex items-center justify-center"
           >
             <div className="relative">
-              <div className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-card/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-              <motion.img
-                src={papayaImg}
-                alt="Papaya fruit"
-                className="relative z-10 w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-2xl mx-auto"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              <motion.div
+                className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-papaya-orange via-primary to-papaya-green blur-[2px]"
+                animate={{ scale: [1, 1.02, 0.98, 1], rotate: [0, 2, -2, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
+              <motion.div
+                className="absolute inset-6 rounded-full border border-white/50"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center text-white text-5xl font-black"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="text-center">
+                  <p className="text-sm tracking-[0.4em] uppercase">Papaya</p>
+                  <p className="text-4xl md:text-5xl">Impact</p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

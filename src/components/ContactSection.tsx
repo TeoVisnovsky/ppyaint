@@ -9,15 +9,44 @@ import { useToast } from "@/hooks/use-toast";
 const ContactSection = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { name, email, message } = form;
-    const subject = encodeURIComponent(`Papaya contact form from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:papayainternational.bratislava@gmail.com?subject=${subject}&body=${body}`;
-    toast({ title: "Message sent!", description: "Thank you for reaching out. We'll get back to you soon." });
-    setForm({ name: "", email: "", message: "" });
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error(data?.error || "We couldn't send your message. Please try again later.");
+      }
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. We'll get back to you soon.",
+      });
+      setForm({ name: "", email: "", message: "" });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "We couldn't send your message. Please try again.";
+      const isNetworkError = errorMessage.includes("Failed to fetch") || errorMessage.includes("ERR_CONNECTION");
+      
+      toast({
+        variant: "destructive",
+        title: isNetworkError ? "Connection issue" : "Something went wrong",
+        description: isNetworkError 
+          ? "Unable to reach the server. Please check your connection and try again."
+          : errorMessage,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -53,6 +82,7 @@ const ContactSection = () => {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
                 className="rounded-2xl bg-card border-border h-13 text-base"
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -63,6 +93,7 @@ const ContactSection = () => {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
                 className="rounded-2xl bg-card border-border h-13 text-base"
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -73,10 +104,11 @@ const ContactSection = () => {
                 required
                 rows={5}
                 className="rounded-2xl bg-card border-border resize-none text-base"
+                disabled={isSubmitting}
               />
             </div>
-            <Button variant="cta" size="lg" type="submit">
-              Send Message <Send className="ml-1 w-4 h-4" />
+            <Button variant="default" size="lg" type="submit" disabled={isSubmitting} className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
+              {isSubmitting ? "Sending" : "Send Message"} <Send className="ml-1 w-4 h-4" />
             </Button>
           </motion.form>
 
