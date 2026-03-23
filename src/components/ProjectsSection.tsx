@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Sun, Heart, Leaf, Sparkles } from "lucide-react";
+import { projects } from "@/data/projects";
 
 // Floating decorative elements
 const floatingElements = [
@@ -19,29 +20,6 @@ const floatingElements = [
   { Icon: Sun, className: "bottom-[1%] left-[60%] text-papaya-yellow/18", delay: 0.9 },
   { Icon: Star, className: "top-[5%] right-[40%] text-papaya-orange/18", delay: 0.4 },
   { Icon: Sparkles, className: "bottom-[25%] left-[35%] text-papaya-green/20", delay: 0.8 },
-];
-
-type Project = {
-  id: string;
-  title: string;
-  status: "current" | "past";
-  date: string;
-  location: string;
-  dateRange: string;
-  palette: string;
-  symbol: string;
-};
-
-const projects: Project[] = [
-  // Current/upcoming projects (above the divider)
-  { id: "1", title: "Bridges of Understanding", status: "current", date: "2025", location: "Bochum, Nemecko", dateRange: "15.3. - 21.3.2026", palette: "from-papaya-orange via-primary to-papaya-yellow", symbol: "🌉" },
-  { id: "2", title: "Digital Skills for All", status: "current", date: "2025", location: "Bratislava, Slovensko", dateRange: "10.4. - 15.4.2026", palette: "from-secondary via-papaya-green to-accent", symbol: "💻" },
-  { id: "3", title: "Green Futures", status: "current", date: "2026", location: "Berlín, Nemecko", dateRange: "1.5. - 8.5.2026", palette: "from-papaya-green via-accent to-primary", symbol: "🌱" },
-
-  // Past projects (below the divider)
-  { id: "4", title: "Voices Unheard", status: "past", date: "2024", location: "Varšava, Poľsko", dateRange: "5.6. - 12.6.2024", palette: "from-muted via-secondary to-primary", symbol: "🎙️" },
-  { id: "5", title: "EuroConnect", status: "past", date: "2023", location: "Madrid, Španielsko", dateRange: "20.7. - 28.7.2023", palette: "from-secondary via-papaya-yellow to-primary", symbol: "🤝" },
-  { id: "6", title: "Active Citizens Lab", status: "past", date: "2023", location: "Riga, Litva", dateRange: "15.8. - 22.8.2023", palette: "from-accent via-primary to-papaya-orange", symbol: "🧪" },
 ];
 
 const fadeUp = {
@@ -96,7 +74,7 @@ const ProjectsSection = () => {
         {/* Timeline Container */}
         <div className="relative">
           {/* Dashed Orange Vertical Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full" 
+          <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 w-1 h-full" 
                style={{
                  background: `repeating-linear-gradient(
                    to bottom,
@@ -118,16 +96,16 @@ const ProjectsSection = () => {
                   key={project.id}
                   variants={fadeUp}
                   custom={index}
-                  className={`relative flex items-center ${isLeft ? "justify-start" : "justify-end"} pt-0`}
+                  className={`relative flex items-center justify-center md:${isLeft ? "justify-start" : "justify-end"} pt-0`}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-10">
+                  <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 -top-4 z-10">
                     <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
                   </div>
 
                   {/* Curved Arrow Connector */}
                   <svg
-                    className="absolute top-2 h-40 left-1/2 -translate-x-1/2"
+                    className="absolute hidden md:block top-2 h-40 left-1/2 -translate-x-1/2"
                     width="420"
                     height="150"
                     viewBox="0 0 420 150"
@@ -164,14 +142,18 @@ const ProjectsSection = () => {
                   {/* Project Bubble */}
                   <motion.div
                     whileHover={{ scale: 1.08 }}
-                    className={`w-96 cursor-pointer group ${isLeft ? "mr-12" : "ml-12"}`}
+                    className={`w-full max-w-[24rem] md:w-96 cursor-pointer group ${isLeft ? "md:mr-12" : "md:ml-12"}`}
                   >
-                    <div className="relative rounded-full overflow-hidden mb-4 h-96 w-96 shadow-lg group-hover:shadow-xl transition-shadow ring-4 ring-primary/80 group-hover:ring-primary">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette}`} />
+                    <div className="relative rounded-full overflow-hidden mb-4 h-72 w-72 mx-auto md:h-96 md:w-96 shadow-lg group-hover:shadow-xl transition-shadow ring-4 ring-primary/80 group-hover:ring-primary">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-25`} />
                       <div className="absolute inset-4 rounded-full border-2 border-white/40" />
-                      <div className="absolute inset-0 flex items-center justify-center text-7xl">
-                        <span>{project.symbol}</span>
-                      </div>
                       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.6),_transparent_50%)]" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground text-center group-hover:text-primary transition-colors">
@@ -190,7 +172,7 @@ const ProjectsSection = () => {
               custom={currentProjects.length}
               className="relative pt-1 pb-1"
             >
-              <div className="absolute left-1/2 transform -translate-x-1/2 z-10 -top-4">
+              <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 z-10 -top-4">
                 <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
               </div>
               <div className="flex justify-center pt-1">
@@ -210,16 +192,16 @@ const ProjectsSection = () => {
                   key={project.id}
                   variants={fadeUp}
                   custom={currentProjects.length + 1 + index}
-                  className={`relative flex items-center ${isLeft ? "justify-start" : "justify-end"} pt-8`}
+                  className={`relative flex items-center justify-center md:${isLeft ? "justify-start" : "justify-end"} pt-8`}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 -top-4 z-10">
+                  <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 -top-4 z-10">
                     <div className="w-8 h-8 rounded-full bg-muted ring-4 ring-background" />
                   </div>
 
                   {/* Curved Arrow Connector */}
                   <svg
-                    className="absolute top-2 h-40 left-1/2 -translate-x-1/2"
+                    className="absolute hidden md:block top-2 h-40 left-1/2 -translate-x-1/2"
                     width="420"
                     height="150"
                     viewBox="0 0 420 150"
@@ -256,14 +238,18 @@ const ProjectsSection = () => {
                   {/* Past Project Bubble - Grayscale with color on hover */}
                   <motion.div
                     whileHover={{ scale: 1.08 }}
-                    className={`w-96 cursor-pointer group ${isLeft ? "mr-12" : "ml-12"}`}
+                    className={`w-full max-w-[24rem] md:w-96 cursor-pointer group ${isLeft ? "md:mr-12" : "md:ml-12"}`}
                   >
-                    <div className="relative rounded-full overflow-hidden mb-4 h-96 w-96 shadow-lg group-hover:shadow-xl transition-all ring-4 ring-muted group-hover:ring-primary/80">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-70 group-hover:opacity-100 transition-opacity duration-300`} />
+                    <div className="relative rounded-full overflow-hidden mb-4 h-72 w-72 mx-auto md:h-96 md:w-96 shadow-lg group-hover:shadow-xl transition-all ring-4 ring-muted group-hover:ring-primary/80">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-300"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-35 group-hover:opacity-20 transition-opacity duration-300`} />
                       <div className="absolute inset-6 rounded-full border border-white/30 group-hover:border-white/60" />
-                      <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                        <span>{project.symbol}</span>
-                      </div>
                       <div className="absolute inset-0 opacity-20 bg-[linear-gradient(135deg,_rgba(255,255,255,0.5)_0%,_transparent_35%,_transparent_70%,_rgba(0,0,0,0.1)_100%)]" />
                     </div>
                     <h3 className="text-lg font-bold text-muted-foreground group-hover:text-foreground text-center transition-colors">
