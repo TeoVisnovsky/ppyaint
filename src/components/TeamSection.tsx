@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import adamImg from "@/assets/adam.jpg";
 import teoImg from "@/assets/teo.jpeg";
-import marekImg from "@/assets/marek.jpg";
 import samoImg from "@/assets/samo.jpg";
 import ninaImg from "@/assets/nina.jpg";
+
+const marekImg = new URL("../assets/marek.jpg", import.meta.url).href;
 
 const team = [
   {
