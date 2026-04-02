@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Team", to: "/team" },
   { label: "Partners", to: "/partners" },
 ];
+const childrenCampsUrl = "https://tabory.ppya.eu";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -109,16 +110,13 @@ const Navbar = () => {
                         <p className="text-sm font-bold">Erasmus Projects</p>
                         <span className="text-xs text-muted-foreground">International exchanges and trainings</span>
                       </Link>
-                      <Link
-                        to="/children-camps"
-                        className={cn(
-                          "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
-                          location.pathname === "/children-camps" && "bg-primary/10 text-primary",
-                        )}
+                      <a
+                        href={childrenCampsUrl}
+                        className="rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors"
                       >
                         <p className="text-sm font-bold">Children Camps</p>
                         <span className="text-xs text-muted-foreground">Summer camps and youth programs</span>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -200,19 +198,16 @@ const Navbar = () => {
                           >
                             Erasmus Projects
                           </Link>
-                          <Link
-                            to="/children-camps"
-                            className={cn(
-                              "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
-                              location.pathname === "/children-camps" && "bg-primary/10 text-primary",
-                            )}
+                          <a
+                            href={childrenCampsUrl}
+                            className="mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground"
                             onClick={() => {
                               setMobileOpen(false);
                               setProjectsMobileOpen(false);
                             }}
                           >
                             Children Camps
-                          </Link>
+                          </a>
                         </div>
                       )}
                     </div>

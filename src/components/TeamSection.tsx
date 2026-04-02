@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import adamImg from "@/assets/adam.jpg";
 import teoImg from "@/assets/teo.jpeg";
-import marekImg from "@/assets/marek.jpeg";
+import marekImg from "@/assets/marek.jpg";
 import samoImg from "@/assets/samo.jpg";
 import ninaImg from "@/assets/nina.jpg";
 
