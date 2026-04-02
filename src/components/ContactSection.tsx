@@ -147,7 +147,7 @@ const ContactSection = () => {
             <div>
               <h4 className="font-extrabold text-foreground mb-3">Follow Us</h4>
               <div className="flex gap-3">
-                <a href="#" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
+                <a href="https://www.instagram.com/papaya.international/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
                   <Instagram className="w-5 h-5" />
                 </a>
                 <a

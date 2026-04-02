@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { servicesData } from "@/data/services";
+import dolomityImg from "@/assets/dolomity.jpeg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -62,10 +63,11 @@ const ServicesSection = () => {
         custom={2}
         className="relative overflow-hidden h-96 md:h-[500px] w-full"
       >
-        <div className="relative h-full w-full bg-gradient-to-br from-papaya-orange via-primary to-papaya-green">
-          <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.7),_transparent_50%)]" />
-          <div className="absolute inset-10 border border-white/30 rounded-[48px]" />
-        </div>
+        <img
+          src={dolomityImg}
+          alt="Dolomities"
+          className="w-full h-full object-cover"
+        />
         <motion.div className="absolute inset-0 bg-black" style={{ opacity: overlayOpacity }} />
       </motion.div>
 

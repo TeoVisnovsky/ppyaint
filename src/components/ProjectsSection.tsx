@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { Star, Sun, Heart, Leaf, Sparkles } from "lucide-react";
 import { projects } from "@/data/projects";
 
@@ -32,8 +33,16 @@ const fadeUp = {
 };
 
 const ProjectsSection = () => {
-  const currentProjects = projects.filter((p) => p.status === "current");
-  const pastProjects = projects.filter((p) => p.status === "past");
+  const location = useLocation();
+  const categoryParam = new URLSearchParams(location.search).get("category");
+  const selectedCategory = (categoryParam as "erasmus" | "childrens-camp") || "all";
+
+  const filteredProjects = selectedCategory === "all" 
+    ? projects 
+    : projects.filter((p) => p.category === selectedCategory);
+
+  const currentProjects = filteredProjects.filter((p) => p.status === "current");
+  const pastProjects = filteredProjects.filter((p) => p.status === "past");
 
   return (
     <section id="projects" className="section-padding bg-background relative overflow-hidden">
@@ -67,28 +76,38 @@ const ProjectsSection = () => {
             Our Journey
           </motion.span>
           <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-6xl font-extrabold mt-3 text-foreground">
-            Projects Timeline
+            {selectedCategory === "erasmus" ? "Our Erasmus Journey" : "Projects Timeline"}
           </motion.h2>
         </motion.div>
 
         {/* Timeline Container */}
         <div className="relative">
-          {/* Dashed Orange Vertical Timeline Line */}
-          <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 w-1 h-full" 
-               style={{
-                 background: `repeating-linear-gradient(
-                   to bottom,
-                   rgb(255, 107, 53) 0px,
-                   rgb(255, 107, 53) 20px,
-                   transparent 20px,
-                   transparent 35px
-                 )`,
-               }} 
-          />
+          {/* Vertical Center Line */}
+          <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-papaya-orange via-primary to-papaya-orange" />
 
-          {/* Content - Full Width Alternating Layout */}
-          <div className="space-y-3">
-            {/* Current Projects */}
+          {/* Timeline Events - Bubble Layout */}
+          <div className="space-y-0">
+            {/* Present Day Marker */}
+            <motion.div
+              variants={fadeUp}
+              custom={0}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="relative py-12 mb-8"
+            >
+              <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 z-10 top-1/2 -translate-y-1/2">
+                <div className="w-8 h-8 rounded-full bg-papaya-orange ring-4 ring-background" />
+              </div>
+              <div className="flex justify-center">
+                <div className="bg-background px-8 py-4 rounded-full border-4 border-papaya-orange">
+                  <span className="text-lg font-bold text-papaya-orange">
+                    Present Day
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
             {currentProjects.map((project, index) => {
               const isLeft = index % 2 === 0;
               return (
@@ -96,93 +115,104 @@ const ProjectsSection = () => {
                   key={project.id}
                   variants={fadeUp}
                   custom={index}
-                  className={`relative flex items-center justify-center md:${isLeft ? "justify-start" : "justify-end"} pt-0`}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="relative flex flex-col items-center group"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 -top-4 z-10">
-                    <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
-                  </div>
+                  {/* Main Container with Bubble and Details */}
+                  <div className={`flex items-center justify-center w-full gap-8 px-4 md:px-0`}>
+                    {/* Left Side - Bubble */}
+                    <motion.div
+                      whileHover={{ scale: 1.08 }}
+                      className={`flex flex-col items-center flex-shrink-0 ${isLeft ? "" : "order-3"} transition-all duration-300 filter group-hover:grayscale-0 grayscale`}
+                    >
+                      {/* Circular Image Bubble */}
+                      <div className="relative mb-6">
+                        <motion.div
+                          whileHover={{ boxShadow: "0 0 40px rgba(255, 127, 80, 0.7)" }}
+                          className="w-80 h-80 rounded-full border-4 border-papaya-orange/50 overflow-hidden bg-card shadow-2xl hover:border-papaya-orange transition-all duration-300"
+                        >
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </motion.div>
+                      </div>
 
-                  {/* Curved Arrow Connector */}
-                  <svg
-                    className="absolute hidden md:block top-2 h-40 left-1/2 -translate-x-1/2"
-                    width="420"
-                    height="150"
-                    viewBox="0 0 420 150"
-                    fill="none"
-                    style={{ opacity: 0.8 }}
-                  >
-                    {isLeft ? (
-                      <>
-                        <path
-                          d="M 210 0 Q 120 30, 30 90 Q 10 105, 0 115"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          className="text-primary"
-                          strokeDasharray="6,6"
-                          fill="none"
-                        />
-                        <polygon points="0,115 -8,125 8,135" fill="currentColor" className="text-primary" />
-                      </>
-                    ) : (
-                      <>
-                        <path
-                          d="M 210 0 Q 300 30, 390 90 Q 410 105, 420 115"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          className="text-primary"
-                          strokeDasharray="6,6"
-                          fill="none"
-                        />
-                        <polygon points="420,115 428,125 412,135" fill="currentColor" className="text-primary" />
-                      </>
-                    )}
-                  </svg>
+                      {/* Project Info Below Bubble */}
+                      <div className="text-center">
+                        <h3 className="text-2xl font-extrabold text-foreground mb-2">{project.title}</h3>
+                        <p className="text-base text-muted-foreground mb-2">
+                          <span className="font-semibold text-foreground">📍</span> {project.location}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          <span className="font-semibold text-foreground">📅</span> {project.dateRange}
+                        </p>
+                      </div>
+                    </motion.div>
 
-                  {/* Project Bubble */}
-                  <motion.div
-                    whileHover={{ scale: 1.08 }}
-                    className={`w-full max-w-[24rem] md:w-96 cursor-pointer group ${isLeft ? "md:mr-12" : "md:ml-12"}`}
-                  >
-                    <div className="relative rounded-full overflow-hidden mb-4 h-72 w-72 mx-auto md:h-96 md:w-96 shadow-lg group-hover:shadow-xl transition-shadow ring-4 ring-primary/80 group-hover:ring-primary">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="absolute inset-0 h-full w-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-25`} />
-                      <div className="absolute inset-4 rounded-full border-2 border-white/40" />
-                      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,_rgba(255,255,255,0.6),_transparent_50%)]" />
+                    {/* Arrow/Connector */}
+                    <div className={`hidden md:block ${isLeft ? "order-2" : "order-2"}`}>
+                      <svg width="40" height="2" viewBox="0 0 40 2" className="fill-none">
+                        <line x1="0" y1="1" x2="35" y2="1" stroke="rgba(255, 127, 80, 0.4)" strokeWidth="2" />
+                        <polygon points="40,1 35,0 35,2" fill="rgba(255, 127, 80, 0.4)" />
+                      </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-foreground text-center group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground text-center mt-2">{project.location}</p>
-                    <p className="text-xs font-light text-muted-foreground text-center mt-1">{project.dateRange}</p>
-                  </motion.div>
+
+                    {/* Right Side - Details */}
+                    <motion.div
+                      initial={{ opacity: 0, x: isLeft ? 20 : -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      className={`flex-1 max-w-md ${isLeft ? "order-3" : "order-1"} transition-all duration-300 filter group-hover:grayscale-0 grayscale`}
+                    >
+                      <div className="bg-card border-l-4 border-papaya-orange rounded-lg p-6 shadow-lg h-full">
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="text-sm font-bold text-papaya-orange uppercase tracking-wider mb-2">Overall Goal</h4>
+                            <p className="text-sm text-muted-foreground">{project.overallGoal}</p>
+                          </div>
+
+                          <div>
+                            <h4 className="text-sm font-bold text-papaya-orange uppercase tracking-wider mb-2">Key Objectives</h4>
+                            <ul className="text-sm text-muted-foreground space-y-1">
+                              {project.objectives.slice(0, 2).map((obj, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                  <span className="text-papaya-orange mt-0.5">•</span>
+                                  <span>{obj}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
                 </motion.div>
               );
             })}
 
-            {/* Divider with Milestone */}
-            <motion.div
-              variants={fadeUp}
-              custom={currentProjects.length}
-              className="relative pt-1 pb-1"
-            >
-              <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 z-10 -top-4">
-                <div className="w-8 h-8 rounded-full bg-primary ring-4 ring-background" />
-              </div>
-              <div className="flex justify-center pt-1">
-                <div className="bg-background px-6 py-3 rounded-full border-2 border-primary">
-                  <span className="text-sm font-bold text-foreground">
-                    🚀 March 2026 - Organization Founded
-                  </span>
+            {/* Past Projects Divider */}
+            {pastProjects.length > 0 && currentProjects.length > 0 && (
+              <motion.div
+                variants={fadeUp}
+                custom={currentProjects.length}
+                className="relative py-8"
+              >
+                <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 z-10 top-1/2 -translate-y-1/2">
+                  <div className="w-6 h-6 rounded-full bg-muted ring-4 ring-background" />
                 </div>
-              </div>
-            </motion.div>
+                <div className="flex justify-center">
+                  <div className="bg-background px-6 py-3 rounded-full border-2 border-muted">
+                    <span className="text-sm font-bold text-muted-foreground">
+                      ✓ Past Projects
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
             {/* Past Projects */}
             {pastProjects.map((project, index) => {
@@ -192,72 +222,36 @@ const ProjectsSection = () => {
                   key={project.id}
                   variants={fadeUp}
                   custom={currentProjects.length + 1 + index}
-                  className={`relative flex items-center justify-center md:${isLeft ? "justify-start" : "justify-end"} pt-8`}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="relative"
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 -top-4 z-10">
-                    <div className="w-8 h-8 rounded-full bg-muted ring-4 ring-background" />
+                  <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 top-6 z-10">
+                    <div className="w-6 h-6 rounded-full bg-muted ring-4 ring-background" />
                   </div>
 
-                  {/* Curved Arrow Connector */}
-                  <svg
-                    className="absolute hidden md:block top-2 h-40 left-1/2 -translate-x-1/2"
-                    width="420"
-                    height="150"
-                    viewBox="0 0 420 150"
-                    fill="none"
-                    style={{ opacity: 0.5 }}
-                  >
-                    {isLeft ? (
-                      <>
-                        <path
-                          d="M 210 0 Q 120 30, 30 90 Q 10 105, 0 115"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          className="text-muted-foreground"
-                          strokeDasharray="6,6"
-                          fill="none"
-                        />
-                        <polygon points="0,115 -8,125 8,135" fill="currentColor" className="text-muted-foreground" />
-                      </>
-                    ) : (
-                      <>
-                        <path
-                          d="M 210 0 Q 300 30, 390 90 Q 410 105, 420 115"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          className="text-muted-foreground"
-                          strokeDasharray="6,6"
-                          fill="none"
-                        />
-                        <polygon points="420,115 428,125 412,135" fill="currentColor" className="text-muted-foreground" />
-                      </>
-                    )}
-                  </svg>
-
-                  {/* Past Project Bubble - Grayscale with color on hover */}
-                  <motion.div
-                    whileHover={{ scale: 1.08 }}
-                    className={`w-full max-w-[24rem] md:w-96 cursor-pointer group ${isLeft ? "md:mr-12" : "md:ml-12"}`}
-                  >
-                    <div className="relative rounded-full overflow-hidden mb-4 h-72 w-72 mx-auto md:h-96 md:w-96 shadow-lg group-hover:shadow-xl transition-all ring-4 ring-muted group-hover:ring-primary/80">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition duration-300"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.palette} opacity-35 group-hover:opacity-20 transition-opacity duration-300`} />
-                      <div className="absolute inset-6 rounded-full border border-white/30 group-hover:border-white/60" />
-                      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(135deg,_rgba(255,255,255,0.5)_0%,_transparent_35%,_transparent_70%,_rgba(0,0,0,0.1)_100%)]" />
-                    </div>
-                    <h3 className="text-lg font-bold text-muted-foreground group-hover:text-foreground text-center transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground text-center mt-2">{project.location}</p>
-                    <p className="text-xs font-light text-muted-foreground text-center mt-1">{project.dateRange}</p>
-                  </motion.div>
+                  {/* Card Container */}
+                  <div className={`flex items-center ${isLeft ? "md:justify-start" : "md:justify-end"}`}>
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className={`w-full max-w-sm md:max-w-xs ${isLeft ? "md:mr-auto md:pl-12" : "md:ml-auto md:pr-12"}`}
+                    >
+                      <div className="bg-card border-2 border-muted/30 rounded-2xl p-6 hover:border-muted/80 transition-colors shadow-lg hover:shadow-xl opacity-75">
+                        <p className="text-xs font-extrabold text-muted-foreground uppercase tracking-widest mb-2">Completed</p>
+                        <h3 className="text-xl font-extrabold text-foreground mb-3">{project.title}</h3>
+                        <div className="space-y-2">
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-semibold text-foreground">📍</span> {project.location}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-semibold text-foreground">📅</span> {project.dateRange}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
                 </motion.div>
               );
             })}

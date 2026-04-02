@@ -19,7 +19,7 @@ const Navbar = () => {
   const [projectsMobileOpen, setProjectsMobileOpen] = useState(false);
   const [projectsDesktopOpen, setProjectsDesktopOpen] = useState(false);
   const location = useLocation();
-  const projectsView = new URLSearchParams(location.search).get("view");
+  const projectsCategory = new URLSearchParams(location.search).get("category");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -100,34 +100,24 @@ const Navbar = () => {
                   >
                     <div className="rounded-3xl border border-border bg-card shadow-xl shadow-primary/10 p-3 flex flex-col gap-1">
                       <Link
-                        to="/projects"
+                        to="/projects?category=erasmus"
                         className={cn(
                           "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
-                          location.pathname === "/projects" && !projectsView && "bg-primary/10 text-primary",
+                          projectsCategory === "erasmus" && "bg-primary/10 text-primary",
                         )}
                       >
-                        <p className="text-sm font-bold">All Projects</p>
-                        <span className="text-xs text-muted-foreground">Complete portfolio and program overview</span>
+                        <p className="text-sm font-bold">Erasmus Projects</p>
+                        <span className="text-xs text-muted-foreground">International exchanges and trainings</span>
                       </Link>
                       <Link
-                        to="/projects?view=current"
+                        to="/children-camps"
                         className={cn(
                           "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
-                          projectsView === "current" && "bg-primary/10 text-primary",
+                          location.pathname === "/children-camps" && "bg-primary/10 text-primary",
                         )}
                       >
-                        <p className="text-sm font-bold">Currently Open</p>
-                        <span className="text-xs text-muted-foreground">Live calls, trainings, and exchanges</span>
-                      </Link>
-                      <Link
-                        to="/projects?view=past"
-                        className={cn(
-                          "rounded-2xl px-4 py-3 text-left hover:bg-primary/5 transition-colors",
-                          projectsView === "past" && "bg-primary/10 text-primary",
-                        )}
-                      >
-                        <p className="text-sm font-bold">Previous Projects</p>
-                        <span className="text-xs text-muted-foreground">Completed collaborations worth revisiting</span>
+                        <p className="text-sm font-bold">Children Camps</p>
+                        <span className="text-xs text-muted-foreground">Summer camps and youth programs</span>
                       </Link>
                     </div>
                   </div>
@@ -144,7 +134,7 @@ const Navbar = () => {
             <Link to="/#contact">Contact us</Link>
           </Button>
           <div className="flex gap-2 ml-1">
-            <a href="#" className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
+            <a href="https://www.instagram.com/papaya.international/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:scale-110 transition-transform">
               <Instagram className="w-4 h-4" />
             </a>
             <a
@@ -198,43 +188,30 @@ const Navbar = () => {
                       {projectsMobileOpen && (
                         <div className="flex flex-col gap-2 pb-3">
                           <Link
-                            to="/projects"
+                            to="/projects?category=erasmus"
                             className={cn(
                               "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
-                              location.pathname === "/projects" && !projectsView && "bg-primary/10 text-primary",
+                              projectsCategory === "erasmus" && "bg-primary/10 text-primary",
                             )}
                             onClick={() => {
                               setMobileOpen(false);
                               setProjectsMobileOpen(false);
                             }}
                           >
-                            All Projects
+                            Erasmus Projects
                           </Link>
                           <Link
-                            to="/projects?view=current"
+                            to="/children-camps"
                             className={cn(
                               "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
-                              projectsView === "current" && "bg-primary/10 text-primary",
+                              location.pathname === "/children-camps" && "bg-primary/10 text-primary",
                             )}
                             onClick={() => {
                               setMobileOpen(false);
                               setProjectsMobileOpen(false);
                             }}
                           >
-                            Currently Open
-                          </Link>
-                          <Link
-                            to="/projects?view=past"
-                            className={cn(
-                              "mx-4 rounded-xl bg-muted/60 px-4 py-2 text-sm font-semibold text-foreground",
-                              projectsView === "past" && "bg-primary/10 text-primary",
-                            )}
-                            onClick={() => {
-                              setMobileOpen(false);
-                              setProjectsMobileOpen(false);
-                            }}
-                          >
-                            Previous Projects
+                            Children Camps
                           </Link>
                         </div>
                       )}

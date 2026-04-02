@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import adamImg from "@/assets/adam.jpg";
+import teoImg from "@/assets/teo.jpeg";
+import marekImg from "@/assets/marek.jpeg";
+import samoImg from "@/assets/samo.jpg";
+import ninaImg from "@/assets/nina.jpg";
 
 const team = [
   {
@@ -7,6 +12,7 @@ const team = [
     bio: "More than four years designing youth experiences, handling international collaboration, communication, and representation for Papaya partners.",
     initials: "AD",
     gradient: "from-papaya-orange via-primary to-papaya-yellow",
+    image: adamImg,
   },
 
   
@@ -16,6 +22,7 @@ const team = [
     bio: "Keeps our digital stack reliable while translating programmes into fresh visuals, recaps, and social content young people relate to.",
     initials: "TE",
     gradient: "from-secondary via-papaya-green to-accent",
+    image: teoImg,
   },
   {
     name: "Marek",
@@ -23,6 +30,7 @@ const team = [
     bio: "Co-founded Papaya to keep grassroots energy in every exchange and now mentors new volunteers as they step into international projects.",
     initials: "MA",
     gradient: "from-papaya-yellow via-primary to-secondary",
+    image: marekImg,
   },
   {
     name: "Samo",
@@ -30,6 +38,7 @@ const team = [
     bio: "Moves seamlessly across six languages to align expectations, negotiate details, and keep multicultural partners in sync from kickoff to delivery.",
     initials: "SA",
     gradient: "from-primary via-papaya-orange to-papaya-dark",
+    image: samoImg,
   },
   {
     name: "Nina",
@@ -37,6 +46,7 @@ const team = [
     bio: "Drafts grant-ready proposals, keeps funding documentation watertight, and steers post-programme evaluation to capture every lesson learned.",
     initials: "NI",
     gradient: "from-papaya-green via-secondary to-primary",
+    image: ninaImg,
   },
 ];
 
@@ -83,11 +93,11 @@ const TeamSection = () => {
               className="bg-card rounded-3xl overflow-hidden card-hover border border-border flex flex-col"
             >
               <div className="relative h-64 overflow-hidden">
-                <div
-                  className={`w-full h-full flex items-center justify-center text-5xl font-black text-white bg-gradient-to-br ${member.gradient}`}
-                >
-                  <span>{member.initials}</span>
-                </div>
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 mix-blend-soft-light bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.3),_transparent_60%)]" />
               </div>
               <div className="p-6 flex flex-col gap-3 text-left">

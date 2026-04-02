@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Sparkles, Sun, Heart, Leaf, Globe } from "lucide-react";
+import papayaHerImg from "@/assets/papaya-her.jpeg";
 
 const floatingIcons = [
   { Icon: Star, className: "top-[15%] right-[8%] text-papaya-orange/30", delay: 0 },
@@ -93,25 +94,21 @@ const HeroSection = () => {
           >
             <div className="relative">
               <motion.div
-                className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-papaya-orange via-primary to-papaya-green blur-[2px]"
-                animate={{ scale: [1, 1.02, 0.98, 1], rotate: [0, 2, -2, 0] }}
+                className="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/50"
+                animate={{ scale: [1, 1.02, 0.98, 1] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
+              >
+                <img
+                  src={papayaHerImg}
+                  alt="Papaya Her"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
               <motion.div
                 className="absolute inset-6 rounded-full border border-white/50"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
               />
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center text-white text-5xl font-black"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="text-center">
-                  <p className="text-sm tracking-[0.4em] uppercase">Papaya</p>
-                  <p className="text-4xl md:text-5xl">Impact</p>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         </div>
