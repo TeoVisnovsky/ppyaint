@@ -78,12 +78,17 @@ button { font: inherit; color: inherit; }
 .prose { max-width: 38em; }
 .prose p:last-child { margin-bottom: 0; }
 
-.h-intro a, .big-links a, .u-link {
+.intro-quote {
+  max-width: 30em; margin: 24px 0 0;
+  font: 400 clamp(1.2rem, .95rem + 1.1vw, 2rem)/1.4 var(--body); letter-spacing: -0.015em;
+}
+
+.h-intro a, .intro-quote a, .big-links a, .u-link {
   text-decoration: none;
   background: linear-gradient(transparent 62%, var(--peach) 62%);
   transition: background-size .2s;
 }
-.h-intro a:hover, .u-link:hover { background: linear-gradient(transparent 0%, var(--peach) 0%); }
+.h-intro a:hover, .intro-quote a:hover, .u-link:hover { background: linear-gradient(transparent 0%, var(--peach) 0%); }
 
 /* ---------- Buttons & pills ---------- */
 .btn {
