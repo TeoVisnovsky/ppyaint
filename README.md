@@ -7,11 +7,12 @@ Plain HTML, CSS and vanilla JavaScript – no build step, works on any hosting.
 | `index.html` | Page structure and static texts |
 | `styles.css` | All styles (mobile-first) |
 | `script.js` | Renders content, project filter & modal, menu, contact form |
-| `data.js` | **Editable content** – projects, team, partners, supporters, news, contact details |
+| `data.js` | **Editable content** – projects, stories, team, partners, supporters, news, contact details |
+| `assets/` | Photos – see `assets/README.md` for exact file names |
 
 ## Editing content
 
-Open `data.js`, copy an existing object in the relevant array (e.g. `PROJECTS`, `TEAM`, `NEWS`) and change the values. Leave `image` empty to show a grey placeholder. Only the 3 newest news items are displayed.
+Open `data.js`, copy an existing object in the relevant array (e.g. `PROJECTS`, `TEAM`, `NEWS`) and change the values. Photos already point to files in `assets/` – drop a file in with that name and it appears; until then a grey placeholder shows the expected path. Only the 3 newest news items are displayed.
 
 ## Contact form
 
