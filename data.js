@@ -58,26 +58,26 @@ const PILLARS = [
    --------------------------------------------------------- */
 const PROJECTS = [
   {
-    id: "think-before-you-share",
-    title: "Think Before You Share",
+    id: "the-power-of-empathy",
+    title: "The Power of Empathy",
     action: "KA153",
     actionLabel: "Mobility of youth workers",
     country: "[COUNTRY]",
     period: "[MONTH]",
     year: "[YEAR]",
     date: "[DATES]",
-    topic: "Media & AI literacy",
-    status: "ongoing",
-    image: "assets/img/projects/think-before-you-share.jpg",
+    topic: "Empathy & [TOPIC]",
+    status: "upcoming",
+    image: "assets/img/projects/the-power-of-empathy.jpg",
     summary:
-      "A training course for youth workers on spotting disinformation, understanding generative AI and teaching young people to think before they click “share”.",
+      "[Short summary – 1–2 sentences about what The Power of Empathy is and who it is for.]",
     description:
-      "Deepfakes, algorithmic feeds and AI-generated content are changing how young people form opinions. Think Before You Share brings youth workers from across Europe together to build practical, non-formal methods for media and AI literacy that they can take straight back into their youth centres, schools and clubs. [ADD MORE DETAIL: number of participants, programme highlights, outputs.]",
+      "[Project description – aims, participants, programme highlights and expected outputs of The Power of Empathy.]",
     partners: ["[Partner organisation] – [Country]", "[Partner organisation] – [Country]"],
     gallery: [
-      "assets/img/projects/think-before-you-share-1.jpg",
-      "assets/img/projects/think-before-you-share-2.jpg",
-      "assets/img/projects/think-before-you-share-3.jpg"
+      "assets/img/projects/the-power-of-empathy-1.jpg",
+      "assets/img/projects/the-power-of-empathy-2.jpg",
+      "assets/img/projects/the-power-of-empathy-3.jpg"
     ]
   },
   {
@@ -136,12 +136,12 @@ const PROJECTS = [
     year: "[YEAR]",
     date: "[DATES]",
     topic: "Environment & volunteering",
-    status: "completed",
+    status: "upcoming",
     image: "assets/img/projects/karisko.jpg",
     summary:
-      "Young volunteers joined Karisko to plant trees and help restore a damaged forest ecosystem.",
+      "Young volunteers will join Karisko to plant trees and help restore a damaged forest ecosystem.",
     description:
-      "Together with Karisko, our volunteers spent [NUMBER] days planting saplings, clearing invasive species and learning about forest ecosystems from local experts. [ADD MORE DETAIL: location, number of trees planted, number of volunteers.]",
+      "Together with Karisko, our volunteers will spend [NUMBER] days planting saplings, clearing invasive species and learning about forest ecosystems from local experts. [ADD MORE DETAIL: location, number of trees planted, number of volunteers.]",
     partners: ["Karisko – Slovakia"],
     gallery: [
       "assets/img/projects/karisko-1.jpg",
@@ -159,7 +159,7 @@ const STORIES = [
   {
     name: "[NAME]",
     from: "Slovakia",
-    project: "Think Before You Share",
+    project: "The Power of Empathy",
     quote: "[Short quote from a participant – what changed for them after the project.]",
     image: "assets/img/stories/story-1.jpg",
     video: ""
@@ -266,10 +266,10 @@ const NEWS = [
   },
   {
     tag: "Training",
-    title: "Youth workers train in media & AI literacy",
+    title: "Coming soon: The Power of Empathy",
     date: "2026-09-05",
     excerpt:
-      "Think Before You Share brought together youth workers from [NUMBER] countries to fight disinformation.",
+      "[Short excerpt about The Power of Empathy – dates, who can apply, what it is about.]",
     image: "assets/img/news/news-3.jpg",
     url: "#"
   },
