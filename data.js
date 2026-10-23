@@ -81,21 +81,21 @@ const PROJECTS = [
     ]
   },
   {
-    id: "slovakia-forestation",
-    title: "Slovakia Forestation",
+    id: "slovakia-reforestation",
+    title: "Slovakia Reforestation",
     action: "Volunteering",
     actionLabel: "Charity volunteering action",
     country: "Slovakia (Bratislava – Rača)",
-    period: "[MONTH]",
-    year: "[YEAR]",
-    date: "[DATE]",
+    period: "October",
+    year: "2026",
+    date: "23 October 2026",
     topic: "Environment & volunteering",
     status: "completed",
     image: "assets/img/projects/slovakia-forestation.jpg",
     summary:
-      "A charity volunteering action in Bratislava – Rača, where young volunteers helped plant trees and care for the local forest.",
+      "A one-day charity volunteering action in Bratislava – Rača, where 25 volunteers planted 380 trees.",
     description:
-      "Slovakia Forestation was a charity volunteering action in Bratislava – Rača. Young volunteers came together to plant trees and help the local forest grow back. [ADD MORE DETAIL: date, number of volunteers, number of trees planted, partners.]",
+      "On 23 October 2026, 25 volunteers came together in Bratislava – Rača for a one-day charity volunteering action and planted 380 trees to help the local forest grow back.",
     partners: ["[Partner organisation] – Slovakia"],
     gallery: [
       "assets/img/projects/slovakia-forestation.jpg",
@@ -252,9 +252,9 @@ const NEWS = [
   {
     tag: "Volunteering",
     title: "We planted trees in Bratislava – Rača",
-    date: "2026-10-15",
+    date: "2026-10-23",
     excerpt:
-      "Our volunteers spent a day helping the forest in Rača grow back as part of Slovakia Forestation, a charity volunteering action. [ADD: number of volunteers and trees planted.]",
+      "25 volunteers spent a day in Rača and planted 380 trees as part of Slovakia Reforestation, a charity volunteering action.",
     image: "assets/img/news/news-1.jpg",
     url: "#"
   },
