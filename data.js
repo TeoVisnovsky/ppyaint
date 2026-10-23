@@ -81,26 +81,26 @@ const PROJECTS = [
     ]
   },
   {
-    id: "bukowina-youth-exchange",
+    id: "slovakia-forestation",
     title: "Slovakia Forestation",
-    action: "KA152",
-    actionLabel: "Youth exchange",
-    country: "Poland",
-    period: "Spring",
-    year: "2027",
-    date: "Spring 2027",
-    topic: "Social resilience & volunteering",
-    status: "upcoming",
-    image: "assets/img/projects/bukowina.jpg",
+    action: "Volunteering",
+    actionLabel: "Charity volunteering action",
+    country: "Slovakia (Bratislava – Rača)",
+    period: "[MONTH]",
+    year: "[YEAR]",
+    date: "[DATE]",
+    topic: "Environment & volunteering",
+    status: "completed",
+    image: "assets/img/projects/slovakia-forestation.jpg",
     summary:
-      "Young people from several countries meet in the Polish Tatras to explore what makes communities resilient and how volunteering can strengthen them.",
+      "A charity volunteering action in Bratislava – Rača, where young volunteers helped plant trees and care for the local forest.",
     description:
-      "Through workshops, outdoor activities, intercultural evenings and a local volunteering action, participants aged [AGE RANGE] will discover their own role in building strong, caring communities. [ADD MORE DETAIL: dates, number of participants per country, how to apply.]",
-    partners: ["[Host organisation] – Poland", "[Partner organisation] – [Country]"],
+      "Slovakia Forestation was a charity volunteering action in Bratislava – Rača. Young volunteers came together to plant trees and help the local forest grow back. [ADD MORE DETAIL: date, number of volunteers, number of trees planted, partners.]",
+    partners: ["[Partner organisation] – Slovakia"],
     gallery: [
-      "assets/img/projects/bukowina-1.jpg",
-      "assets/img/projects/bukowina-2.jpg",
-      "assets/img/projects/bukowina-3.jpg"
+      "assets/img/projects/slovakia-forestation-1.jpg",
+      "assets/img/projects/slovakia-forestation-2.jpg",
+      "assets/img/projects/slovakia-forestation-3.jpg"
     ]
   },
   {
