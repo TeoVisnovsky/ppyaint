@@ -247,11 +247,11 @@ const SUPPORTERS = [
    --------------------------------------------------------- */
 const NEWS = [
   {
-    tag: "Call",
-    title: "Applications open for our youth exchange in Poland",
+    tag: "Volunteering",
+    title: "We planted trees in Bratislava – Rača",
     date: "2026-10-15",
     excerpt:
-      "Are you between [AGE] and [AGE] and curious about volunteering? Join us in Bukowina Tatrzańska in spring 2027.",
+      "Our volunteers spent a day helping the forest in Rača grow back as part of Slovakia Forestation, a charity volunteering action. [ADD: number of volunteers and trees planted.]",
     image: "assets/img/news/news-1.jpg",
     url: "#"
   },
