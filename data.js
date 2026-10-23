@@ -95,8 +95,8 @@ const PROJECTS = [
     summary:
       "A one-day charity volunteering action in Bratislava – Rača, where 25 volunteers planted 380 trees.",
     description:
-      "On 23 October 2026, 25 volunteers came together in Bratislava – Rača for a one-day charity volunteering action and planted 380 trees to help the local forest grow back.",
-    partners: ["[Partner organisation] – Slovakia"],
+      "On 23 October 2026, 25 volunteers came together in Bratislava – Rača for a one-day charity volunteering action and planted 380 trees to help the local forest grow back. The activity was organised under the auspices of Lesy Slovenskej republiky (Forests of the Slovak Republic).",
+    partners: ["Lesy Slovenskej republiky – patronage"],
     gallery: [
       "assets/img/projects/slovakia-forestation.jpg",
       "assets/img/projects/slovakia-forestation-1.jpg",
@@ -254,7 +254,7 @@ const NEWS = [
     title: "We planted trees in Bratislava – Rača",
     date: "2026-10-23",
     excerpt:
-      "25 volunteers spent a day in Rača and planted 380 trees as part of Slovakia Reforestation, a charity volunteering action.",
+      "25 volunteers spent a day in Rača and planted 380 trees as part of Slovakia Reforestation, a charity volunteering action organised under the auspices of Lesy Slovenskej republiky.",
     image: "assets/img/news/news-1.jpg",
     url: "#"
   },
