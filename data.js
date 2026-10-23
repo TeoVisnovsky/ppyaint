@@ -82,7 +82,7 @@ const PROJECTS = [
   },
   {
     id: "bukowina-youth-exchange",
-    title: "Youth Exchange in Bukowina Tatrzańska",
+    title: "Slovakia Forestation",
     action: "KA152",
     actionLabel: "Youth exchange",
     country: "Poland",
