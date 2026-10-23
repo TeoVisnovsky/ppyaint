@@ -98,9 +98,12 @@ const PROJECTS = [
       "Slovakia Forestation was a charity volunteering action in Bratislava – Rača. Young volunteers came together to plant trees and help the local forest grow back. [ADD MORE DETAIL: date, number of volunteers, number of trees planted, partners.]",
     partners: ["[Partner organisation] – Slovakia"],
     gallery: [
+      "assets/img/projects/slovakia-forestation.jpg",
       "assets/img/projects/slovakia-forestation-1.jpg",
       "assets/img/projects/slovakia-forestation-2.jpg",
-      "assets/img/projects/slovakia-forestation-3.jpg"
+      "assets/img/projects/slovakia-forestation-3.jpg",
+      "assets/img/projects/slovakia-forestation-4.jpg",
+      "assets/img/projects/slovakia-forestation-5.jpg"
     ]
   },
   {
