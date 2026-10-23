@@ -241,7 +241,7 @@ const PARTNERS = [
 const SUPPORTERS = [
   { name: "Erasmus+ / European Union", logo: "", url: "https://erasmus-plus.ec.europa.eu/" },
   { name: "Tatra banka Foundation", logo: "", url: "https://www.nadaciatatrabanky.sk/" },
-  { name: "[Supporter]", logo: "", url: "#" }
+  { name: "Lesy Slovenskej republiky", logo: "", url: "https://www.lesy.sk/" }
 ];
 
 /* ---------------------------------------------------------
