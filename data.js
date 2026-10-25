@@ -133,8 +133,8 @@ const PROJECTS = [
     id: "forest-restoration-karisko",
     title: "Forest Restoration with Karisko",
     action: "Volunteering",
-    actionLabel: "Local volunteering action",
-    country: "Slovakia",
+    actionLabel: "International volunteering project",
+    country: "Martinique (France)",
     period: "[MONTH]",
     year: "[YEAR]",
     date: "[DATES]",
@@ -142,10 +142,10 @@ const PROJECTS = [
     status: "upcoming",
     image: "assets/img/projects/karisko.jpg",
     summary:
-      "Young volunteers will join Karisko to plant trees and help restore a damaged forest ecosystem.",
+      "Young volunteers will join Karisko in Martinique to plant trees and help restore a damaged forest ecosystem.",
     description:
-      "Together with Karisko, our volunteers will spend [NUMBER] days planting saplings, clearing invasive species and learning about forest ecosystems from local experts. [ADD MORE DETAIL: location, number of trees planted, number of volunteers.]",
-    partners: ["Karisko – Slovakia"],
+      "Together with Karisko, a non-profit organisation based in Fort-de-France on the Caribbean island of Martinique, our volunteers will spend [NUMBER] days planting saplings, clearing invasive species and learning about forest ecosystems from local experts. [ADD MORE DETAIL: dates, number of volunteers, how to apply.]",
+    partners: ["Karisko – Fort-de-France, Martinique (France)"],
     gallery: [
       "assets/img/projects/karisko-1.jpg",
       "assets/img/projects/karisko-2.jpg",
@@ -232,7 +232,7 @@ const TEAM = [
    logo: e.g. "assets/img/logos/karisko.png" – empty shows the name only
    --------------------------------------------------------- */
 const PARTNERS = [
-  { name: "Karisko", country: "Slovakia", logo: "", url: "#" },
+  { name: "Karisko", country: "Martinique (France)", logo: "", url: "#" },
   { name: "[Partner organisation]", country: "Poland", logo: "", url: "#" },
   { name: "[Partner organisation]", country: "[Country]", logo: "", url: "#" },
   { name: "[Partner organisation]", country: "[Country]", logo: "", url: "#" }
