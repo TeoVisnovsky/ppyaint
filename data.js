@@ -135,22 +135,19 @@ const PROJECTS = [
     action: "Volunteering",
     actionLabel: "International volunteering project",
     country: "Martinique (France)",
-    period: "[MONTH]",
-    year: "[YEAR]",
-    date: "[DATES]",
+    period: "TBA",
+    year: "TBA",
+    date: "Dates to be announced",
     topic: "Environment & volunteering",
     status: "upcoming",
     image: "assets/img/projects/karisko.jpg",
     summary:
       "Young volunteers will join Karisko in Martinique to plant trees and help restore a damaged forest ecosystem.",
     description:
-      "Together with Karisko, a non-profit organisation based in Fort-de-France on the Caribbean island of Martinique, our volunteers will spend [NUMBER] days planting saplings, clearing invasive species and learning about forest ecosystems from local experts. [ADD MORE DETAIL: dates, number of volunteers, how to apply.]",
+      "Together with Karisko, a non-profit organisation based in Fort-de-France on the Caribbean island of Martinique, our volunteers will plant saplings, clear invasive species and learn about forest ecosystems from local experts. Dates will be announced soon.",
     partners: ["Karisko – Fort-de-France, Martinique (France)"],
-    gallery: [
-      "assets/img/projects/karisko-1.jpg",
-      "assets/img/projects/karisko-2.jpg",
-      "assets/img/projects/karisko-3.jpg"
-    ]
+    // photos will be added after the event
+    gallery: []
   }
 ];
 
