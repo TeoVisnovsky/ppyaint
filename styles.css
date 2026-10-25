@@ -239,7 +239,7 @@ button { font: inherit; color: inherit; }
 .tile-title a { text-decoration: none; }
 .tile:hover .tile-title a { text-decoration: underline; text-underline-offset: 4px; }
 .tile-text { margin: 10px 0 0; font-size: .95rem; }
-.tile-photo { padding: 0; aspect-ratio: 3 / 2; } /* wide, so group photos fit */
+.tile-photo { padding: 0; }
 .tile-photo > * { position: absolute; inset: 0; }
 .value-list { display: grid; gap: 6px; font-size: .95rem; }
 .value-list strong { font-family: var(--head); font-weight: 600; }
@@ -372,7 +372,6 @@ button { font: inherit; color: inherit; }
   .tiles { grid-template-columns: repeat(2, 1fr); }
   .tile { aspect-ratio: 1; min-height: 0; }
   .tile-head { grid-column: 1 / -1; }
-  .tile-photo { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
   .news-grid { grid-template-columns: repeat(2, 1fr); }
   .news-big { grid-column: 1 / -1; }
   .news-wide { grid-column: 1 / -1; aspect-ratio: auto; }
@@ -433,9 +432,9 @@ button { font: inherit; color: inherit; }
   .tile { padding: 20px 20px 24px; }
   .t-mission { grid-column: 3; grid-row: 1; }
   .t-vision { grid-column: 4; grid-row: 1; }
-  .t-name { grid-column: 1; grid-row: 2; }
   .t-values { grid-column: 2; grid-row: 2; }
-  .t-photo { grid-column: 3 / span 2; grid-row: 2; aspect-ratio: auto; }
+  .t-name { grid-column: 3; grid-row: 2; }
+  .t-photo { grid-column: 4; grid-row: 2; }
   .tiles-row .tile-head { grid-column: 1; }
   .section-tiles, .section-involved, .section-stories, .section-team { padding-bottom: 112px; }
 
